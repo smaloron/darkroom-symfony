@@ -50,7 +50,7 @@ class Unit
 
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
+     * @var \Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
      *
      * @ORM\ManyToOne(targetEntity="UnitCategory")
      * @ORM\JoinColumns({
@@ -145,7 +145,7 @@ class Unit
     /**
      * Get unitCategory
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
+     * @return UnitCategory
      */
     public function getUnitCategory()
     {
@@ -155,7 +155,7 @@ class Unit
     /**
      * Set unitCategory
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\UnitCategory $unitCategory
+     * @param UnitCategory $unitCategory
      *
      * @return Unit
      */

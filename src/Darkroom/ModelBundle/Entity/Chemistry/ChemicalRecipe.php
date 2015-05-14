@@ -41,7 +41,7 @@ class ChemicalRecipe
     private $notes;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory
+     * @var RecipeCategory
      *
      * @ORM\ManyToOne(targetEntity="RecipeCategory", inversedBy="recipes")
      * @ORM\JoinColumns({
@@ -51,7 +51,7 @@ class ChemicalRecipe
     private $recipeCategory;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\Manufacturer
+     * @var Manufacturer
      *
      * @ORM\ManyToOne(targetEntity="Manufacturer", inversedBy="recipes")
      * @ORM\JoinColumns({
@@ -158,7 +158,7 @@ class ChemicalRecipe
     /**
      * Get recipeCategory
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory
+     * @return RecipeCategory
      */
     public function getRecipeCategory()
     {
@@ -168,7 +168,7 @@ class ChemicalRecipe
     /**
      * Set recipeCategory
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory $recipeCategory
+     * @param RecipeCategory $recipeCategory
      *
      * @return ChemicalRecipe
      */
@@ -182,7 +182,7 @@ class ChemicalRecipe
     /**
      * Get manufacturer
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\Manufacturer
+     * @return Manufacturer
      */
     public function getManufacturer()
     {
@@ -192,7 +192,7 @@ class ChemicalRecipe
     /**
      * Set manufacturer
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\Manufacturer $manufacturer
+     * @param Manufacturer $manufacturer
      *
      * @return ChemicalRecipe
      */

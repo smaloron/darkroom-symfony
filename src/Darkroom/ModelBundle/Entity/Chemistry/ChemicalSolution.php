@@ -109,7 +109,7 @@ class ChemicalSolution
     private $oneUse = false;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer
+     * @var SolutionContainer
      *
      * @ORM\ManyToOne(targetEntity="SolutionContainer", inversedBy="solutions")
      * @ORM\JoinColumns({
@@ -119,7 +119,7 @@ class ChemicalSolution
     private $container;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe
+     * @var ChemicalRecipe
      *
      * @ORM\ManyToOne(targetEntity="ChemicalRecipe")
      * @ORM\JoinColumns({
@@ -446,7 +446,7 @@ class ChemicalSolution
     /**
      * Get container
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer
+     * @return SolutionContainer
      */
     public function getContainer()
     {
@@ -456,7 +456,7 @@ class ChemicalSolution
     /**
      * Set container
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer $container
+     * @param SolutionContainer $container
      *
      * @return ChemicalSolution
      */
@@ -470,7 +470,7 @@ class ChemicalSolution
     /**
      * Get recipe
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe
+     * @return ChemicalRecipe
      */
     public function getRecipe()
     {
@@ -480,7 +480,7 @@ class ChemicalSolution
     /**
      * Set recipe
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe $recipe
+     * @param ChemicalRecipe $recipe
      *
      * @return ChemicalSolution
      */

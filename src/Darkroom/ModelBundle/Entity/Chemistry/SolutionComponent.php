@@ -30,7 +30,7 @@ class SolutionComponent
     private $volume;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution
+     * @var ChemicalSolution
      *
      * @ORM\ManyToOne(targetEntity="ChemicalSolution")
      * @ORM\JoinColumns({
@@ -40,7 +40,7 @@ class SolutionComponent
     private $component;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution
+     * @var ChemicalSolution
      *
      * @ORM\ManyToOne(targetEntity="ChemicalSolution")
      * @ORM\JoinColumns({
@@ -86,7 +86,7 @@ class SolutionComponent
     /**
      * Get component
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution
+     * @return ChemicalSolution
      */
     public function getComponent()
     {
@@ -96,7 +96,7 @@ class SolutionComponent
     /**
      * Set component
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution $component
+     * @param ChemicalSolution $component
      * @return SolutionComponent
      */
     public function setComponent(ChemicalSolution $component = null)
@@ -109,7 +109,7 @@ class SolutionComponent
     /**
      * Get solution
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution
+     * @return ChemicalSolution
      */
     public function getSolution()
     {
@@ -119,7 +119,7 @@ class SolutionComponent
     /**
      * Set solution
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution $solution
+     * @param ChemicalSolution $solution
      * @return SolutionComponent
      */
     public function setSolution(ChemicalSolution $solution = null)

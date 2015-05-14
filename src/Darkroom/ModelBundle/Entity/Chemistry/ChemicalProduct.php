@@ -38,7 +38,7 @@ class ChemicalProduct
     private $name;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
+     * @var UnitCategory
      *
      * @Assert\NotBlank(message="label must not be empty")
      *
@@ -101,7 +101,7 @@ class ChemicalProduct
     /**
      * Get unitType
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
+     * @return UnitCategory
      */
     public function getUnitCategory()
     {
@@ -111,7 +111,7 @@ class ChemicalProduct
     /**
      * Set unitType
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\UnitCategory $unitCategory
+     * @param UnitCategory $unitCategory
      *
      * @return ChemicalProduct
      */

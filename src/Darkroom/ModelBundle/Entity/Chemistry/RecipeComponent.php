@@ -30,7 +30,7 @@ class RecipeComponent
     private $quantity;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalProduct
+     * @var ChemicalProduct
      *
      * @ORM\ManyToOne(targetEntity="ChemicalProduct", inversedBy="recipes")
      * @ORM\JoinColumns({
@@ -40,7 +40,7 @@ class RecipeComponent
     private $chemical;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe
+     * @var ChemicalRecipe
      *
      * @ORM\ManyToOne(targetEntity="ChemicalRecipe")
      * @ORM\JoinColumns({
@@ -50,7 +50,7 @@ class RecipeComponent
     private $recipe;
 
     /**
-     * @var \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\Unit
+     * @var Unit
      *
      * @ORM\ManyToOne(targetEntity="Unit")
      * @ORM\JoinColumns({
@@ -96,7 +96,7 @@ class RecipeComponent
     /**
      * Get chemical
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalProduct
+     * @return ChemicalProduct
      */
     public function getChemical()
     {
@@ -106,7 +106,7 @@ class RecipeComponent
     /**
      * Set chemical
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalProduct $chemical
+     * @param ChemicalProduct $chemical
      * @return RecipeComponent
      */
     public function setChemical(ChemicalProduct $chemical = null)
@@ -119,7 +119,7 @@ class RecipeComponent
     /**
      * Get recipe
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe
+     * @return ChemicalRecipe
      */
     public function getRecipe()
     {
@@ -129,7 +129,7 @@ class RecipeComponent
     /**
      * Set recipe
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe $recipe
+     * @param ChemicalRecipe $recipe
      * @return RecipeComponent
      */
     public function setRecipe(ChemicalRecipe $recipe = null)
@@ -142,7 +142,7 @@ class RecipeComponent
     /**
      * Get unit
      *
-     * @return \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\Unit
+     * @return Unit
      */
     public function getUnit()
     {
@@ -152,7 +152,7 @@ class RecipeComponent
     /**
      * Set unit
      *
-     * @param \Smaloron\Darkroom\ModelBundle\Entity\Chemistry\Unit $unit
+     * @param Unit $unit
      * @return RecipeComponent
      */
     public function setUnit(Unit $unit = null)
