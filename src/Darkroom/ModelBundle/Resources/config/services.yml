@@ -1,0 +1,80 @@
+services:
+  Darkroom.model.manager.unitCategory:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:UnitCategory"
+      - "Smaloron\Darkroom\ModelsBundle\Form\UnitCategoryType"
+    scope: request
+
+  Darkroom.model.manager.unit:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:Unit"
+      - "Smaloron\Darkroom\ModelsBundle\Form\UnitType"
+    scope: request
+
+  Darkroom.model.manager.manufacturer:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:Manufacturer"
+      - "Smaloron\Darkroom\ModelsBundle\Form\ManufacturerType"
+    scope: request
+
+  Darkroom.model.manager.chemical_product:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:ChemicalProduct"
+      - "Smaloron\Darkroom\ModelsBundle\Form\ChemicalProductType"
+    scope: request
+
+  Darkroom.model.manager.chemical_recipe:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:ChemicalRecipe"
+      - "Smaloron\Darkroom\ModelsBundle\Form\ChemicalRecipeType"
+    scope: request
+
+  Darkroom.model.manager.chemical_solution:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:ChemicalSolution"
+      - "Smaloron\Darkroom\ModelsBundle\Form\ChemicalSolutionType"
+    scope: request
+
+  Darkroom.model.manager.recipe_category:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:RecipeCategory"
+      - "Smaloron\Darkroom\ModelsBundle\Form\RecipeCategoryType"
+    scope: request
+
+  Darkroom.model.manager.solution_container:
+    class: Smaloron\Darkroom\ModelsBundle\EntityManager\BaseEntityManager
+    arguments:
+      - @doctrine.orm.default_entity_manager
+      - @form.factory
+      - @request
+      - "DarkroomModelsBundle:SolutionContainer"
+      - "Smaloron\Darkroom\ModelsBundle\Form\SolutionContainerType"
+    scope: request
