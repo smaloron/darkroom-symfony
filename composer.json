@@ -18,10 +18,23 @@
         "symfony/monolog-bundle": "~2.4",
         "sensio/distribution-bundle": "~3.0,>=3.0.12",
         "sensio/framework-extra-bundle": "~3.0,>=3.0.2",
-        "incenteev/composer-parameter-handler": "~2.0"
+        "incenteev/composer-parameter-handler": "~2.0",
+        "doctrine/doctrine-fixtures-bundle": "2.2",
+        "doctrine/data-fixtures" : "dev-master",
+        "hautelook/alice-bundle": "0.1.*",
+        "doctrine/migrations": "dev-master",
+        "doctrine/doctrine-migrations-bundle": "dev-master",
+        "semantic/ui": "1.12.*",
+        "components/jquery": "2.*"
+
+
+
+
+
     },
     "require-dev": {
-        "sensio/generator-bundle": "~2.3"
+        "sensio/generator-bundle": "~2.3",
+        "phpunit/phpunit": "3.7.*"
     },
     "scripts": {
         "post-root-package-install": [
@@ -47,7 +60,8 @@
         ]
     },
     "config": {
-        "bin-dir": "bin"
+        "bin-dir": "bin",
+        "component-dir": "vendor"
     },
     "extra": {
         "symfony-app-dir": "app",
