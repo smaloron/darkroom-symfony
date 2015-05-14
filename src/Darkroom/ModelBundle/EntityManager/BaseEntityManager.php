@@ -1,5 +1,5 @@
 <?php
-namespace Smaloron\Darkroom\ModelsBundle\EntityManager;
+namespace Darkroom\ModelBundle\EntityManager;
 
 use Doctrine\Entity;
 use Doctrine\ORM\EntityManager;
@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * This class is an abstract entity manager providing the base crud features
  * Class AbstractEntityManager
- * @package Smaloron\Darkroom\ModelsBundle\EntityManager
+ * @package Darkroom\ModelBundle\EntityManager
  */
 class BaseEntityManager
 {
