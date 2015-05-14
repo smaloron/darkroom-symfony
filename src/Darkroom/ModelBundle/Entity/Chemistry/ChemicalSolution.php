@@ -1,6 +1,6 @@
 <?php
 
-namespace Smaloron\Darkroom\ModelBundle\Entity\Chemistry;
+namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -120,6 +120,8 @@ class ChemicalSolution
 
     /**
      * @var ChemicalRecipe
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\ManyToOne(targetEntity="ChemicalRecipe")
      * @ORM\JoinColumns({
@@ -291,7 +293,6 @@ class ChemicalSolution
     public function getVolumeLeft()
     {
         return $this->getInitialVolume() - $this->getUsedVolume();
-        //return $this->volumeLeft;
     }
 
     /**
@@ -316,7 +317,6 @@ class ChemicalSolution
     public function getInitialVolume()
     {
         return $this->getTotalVolume();
-        //return $this->initialVolume;
     }
 
     /**
@@ -528,6 +528,30 @@ class ChemicalSolution
             $item->setSolution($this);
         }
         $this->components = $components;
+    }
+
+    /**
+     * @return bool
+     *
+     * @Assert\True()
+     */
+    public function checkContainerVolume(){
+        $check = true;
+        if($this->container != null){
+            $containerVolume = $this->container->getVolumeCapacity();
+            $check = $containerVolume >= $this->getInitialVolume();
+        }
+
+        return $check;
+    }
+
+    /**
+     * @return bool
+     *
+     * @Assert\True()
+     */
+    public function checkComponentsVolume(){
+        return $this->waterVolume + $this->getComponentsVolume() == $this->initialVolume;
     }
 
 

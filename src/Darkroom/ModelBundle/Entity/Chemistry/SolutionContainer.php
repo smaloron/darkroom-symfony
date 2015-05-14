@@ -1,6 +1,6 @@
 <?php
 
-namespace Smaloron\Darkroom\ModelBundle\Entity\Chemistry;
+namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,12 +26,18 @@ class SolutionContainer
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=15)
+     *
      * @ORM\Column(name="code", type="string", length=15, nullable=false)
      */
     private $code;
 
     /**
      * @var float
+     *
+     * @Assert\NotBlank()
+     * @Assert\GreaterThan(value=0)
      *
      * @ORM\Column(name="volume_capacity", type="float", precision=10, scale=0, nullable=false)
      */

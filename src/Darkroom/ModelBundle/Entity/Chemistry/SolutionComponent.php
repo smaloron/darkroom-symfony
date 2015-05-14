@@ -1,6 +1,6 @@
 <?php
 
-namespace Smaloron\Darkroom\ModelBundle\Entity\Chemistry;
+namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,12 +25,17 @@ class SolutionComponent
     /**
      * @var float
      *
+     * @Assert\NotBlank()
+     * @Assert\GreaterThan(value=0)
+     *
      * @ORM\Column(name="volume", type="float", precision=10, scale=0, nullable=false)
      */
     private $volume;
 
     /**
      * @var ChemicalSolution
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\ManyToOne(targetEntity="ChemicalSolution")
      * @ORM\JoinColumns({
@@ -41,6 +46,8 @@ class SolutionComponent
 
     /**
      * @var ChemicalSolution
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\ManyToOne(targetEntity="ChemicalSolution")
      * @ORM\JoinColumns({
@@ -128,4 +135,17 @@ class SolutionComponent
 
         return $this;
     }
+
+    /**
+     * Check if the choosen volume of the component is coherent
+     * with the avalaible volume of the component solution
+     * @Assert\True()
+     *
+     * @return bool
+     */
+    public function checkComponentVolume(){
+        $componentVolumeLeft = $this->getComponent()->getVolumeLeft();
+        return $componentVolumeLeft >= $this->getVolume();
+    }
+
 }

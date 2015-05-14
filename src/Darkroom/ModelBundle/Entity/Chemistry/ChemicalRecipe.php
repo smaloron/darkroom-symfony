@@ -1,6 +1,6 @@
 <?php
 
-namespace Smaloron\Darkroom\ModelBundle\Entity\Chemistry;
+namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -52,6 +52,8 @@ class ChemicalRecipe
 
     /**
      * @var Manufacturer
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\ManyToOne(targetEntity="Manufacturer", inversedBy="recipes")
      * @ORM\JoinColumns({

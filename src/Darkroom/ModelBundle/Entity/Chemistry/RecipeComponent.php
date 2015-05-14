@@ -1,6 +1,6 @@
 <?php
 
-namespace Smaloron\Darkroom\ModelBundle\Entity\Chemistry;
+namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -25,12 +25,17 @@ class RecipeComponent
     /**
      * @var float
      *
+     * @Assert\NotBlank()
+     * @Assert\GreaterThan(value=0)
+     *
      * @ORM\Column(name="quantity", type="float", precision=10, scale=0, nullable=false)
      */
     private $quantity;
 
     /**
      * @var ChemicalProduct
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\ManyToOne(targetEntity="ChemicalProduct", inversedBy="recipes")
      * @ORM\JoinColumns({
@@ -42,6 +47,8 @@ class RecipeComponent
     /**
      * @var ChemicalRecipe
      *
+     * @Assert\NotBlank()
+     *
      * @ORM\ManyToOne(targetEntity="ChemicalRecipe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
@@ -51,6 +58,8 @@ class RecipeComponent
 
     /**
      * @var Unit
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\ManyToOne(targetEntity="Unit")
      * @ORM\JoinColumns({
@@ -160,5 +169,18 @@ class RecipeComponent
         $this->unit = $unit;
 
         return $this;
+    }
+
+    /**
+     * Check if the unit category of the choosen unit matches
+     * with the unit category of the chemical product
+     * @Assert\True()
+     * @return bool
+     */
+    public function checkUnitCategory(){
+        $chemicalUnitCategory = $this->getChemical()->getUnitCategory()->getId();
+        $componentUnitCategory = $this->getUnit()->getUnitCategory()->getId();
+
+        return $chemicalUnitCategory == $componentUnitCategory;
     }
 }

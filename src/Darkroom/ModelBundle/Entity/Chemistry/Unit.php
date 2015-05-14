@@ -1,6 +1,6 @@
 <?php
 
-namespace Smaloron\Darkroom\ModelBundle\Entity\Chemistry;
+namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -30,12 +30,18 @@ class Unit
     /**
      * @var string
      *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=50)
+     *
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
      */
     private $name;
 
     /**
      * @var string
+     *
+     * @Assert\NotBlank()
+     * @Assert\Length(max=10)
      *
      * @ORM\Column(name="abbrev", type="string", length=10, nullable=false)
      */
@@ -44,13 +50,18 @@ class Unit
     /**
      * @var float
      *
+     * @Assert\NotBlank()
+     * @Assert\GreaterThan(value=0)
+     *
      * @ORM\Column(name="conversion_rate", type="float", precision=10, scale=0, nullable=false)
      */
     private $conversionRate = '1';
 
 
     /**
-     * @var \Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
+     * @var UnitCategory
+     *
+     * @Assert\NotBlank()
      *
      * @ORM\ManyToOne(targetEntity="UnitCategory")
      * @ORM\JoinColumns({
