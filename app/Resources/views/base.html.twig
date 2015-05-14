@@ -1,13 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
+<head>
+    <meta charset="UTF-8"/>
+    <title>{% block title %}Darkroom{% endblock %}</title>
+    {% block stylesheets %}
+        {% stylesheets
+        '../vendor/semantic/ui/dist/semantic.css'
+        '%kernel.root_dir%/Resources/public/css/main.css'
+        filter='?yui_css, cssrewrite' output='assets/css/minified.css' %}
+        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
+        {% endstylesheets %}
+    {% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body class="ui grid centered">
+<header class="ui ten wide column">
+    {% block header %}
+        <h1 class="ui header">Darkroom</h1>
+    {% endblock %}
+    {% include '_mainMenu.html.twig' %}
+</header>
+
+<section class="ui grid centered">
+    <aside class="ui three wide column">
+        {% block subnav %}{% endblock %}
+    </aside>
+    <article class="ui eleven wide column">
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-    </body>
+    </article>
+</section>
+
+
+<footer>
+    {% include '_footer.html.twig' %}
+</footer>
+
+{% block javascriptsFiles %}
+    {% javascripts
+    '../vendor/components/jquery/jquery.js'
+    '../vendor/semantic/ui/dist/semantic.js'
+    filter='?yui_js' output='assets/js/minified.js' %}
+    <script type="text/javascript" src="{{ asset_url }}"></script>
+    {% endjavascripts %}
+{% endblock %}
+</body>
 </html>
