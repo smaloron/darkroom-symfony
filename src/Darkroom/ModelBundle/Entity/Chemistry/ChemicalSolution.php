@@ -292,7 +292,10 @@ class ChemicalSolution
      */
     public function getVolumeLeft()
     {
-        return $this->getInitialVolume() - $this->getUsedVolume();
+        $initialVolume = $this->getInitialVolume();
+        $usedVolume = $this->getUsedVolume();
+        //return $this->getInitialVolume() - $this->getUsedVolume();
+        return $initialVolume - $usedVolume;
     }
 
     /**
@@ -308,6 +311,7 @@ class ChemicalSolution
 
         return $this;
     }
+
 
     /**
      * Get initialVolume
@@ -507,6 +511,15 @@ class ChemicalSolution
         $this->dependantSolutions = $dependantSolutions;
     }
 
+    public function addDependantSolution(SolutionComponent $dependant){
+        $this->dependantSolutions->add($dependant);
+        return $this;
+    }
+
+    public function removeDependantSolution(SolutionComponent $dependant){
+        $this->dependantSolutions->removeElement($dependant);
+    }
+
     /**
      * Get the solution components
      *
@@ -531,6 +544,25 @@ class ChemicalSolution
     }
 
     /**
+     * Add a new component to the solution
+     * @param SolutionComponent $component
+     * @return $this
+     */
+    public function addComponent(SolutionComponent $component){
+        $this->components->add($component);
+        return $this;
+    }
+
+    /**
+     * Remove a component from the solution
+     * @param SolutionComponent $component
+     */
+    public function removeComponent(SolutionComponent $component){
+        $this->components->removeElement($component);
+    }
+
+    /**
+     * Check if the container's capacity matches with the solution's volume
      * @return bool
      *
      * @Assert\True()
@@ -546,6 +578,8 @@ class ChemicalSolution
     }
 
     /**
+     * Check if the total volume of the solution is equal
+     * to the sum of the water volume and the components volume
      * @return bool
      *
      * @Assert\True()

@@ -100,6 +100,24 @@ class ChemicalRecipe
     }
 
     /**
+     * Add a new component to the recipe
+     * @param SolutionComponent $component
+     * @return $this
+     */
+    public function addComponent(SolutionComponent $component){
+        $this->components->add($component);
+        return $this;
+    }
+
+    /**
+     * Remove a component from the recipe
+     * @param SolutionComponent $component
+     */
+    public function removeComponent(SolutionComponent $component){
+        $this->components->removeElement($component);
+    }
+
+    /**
      * Get id
      *
      * @return integer
