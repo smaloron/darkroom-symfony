@@ -1,6 +1,6 @@
 <?php
 
-namespace Smaloron\Darkroom\AppBundle\Controller;
+namespace Darkroom\AppBundle\Controller;
 
 use Doctrine\ORM\EntityManager;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -13,10 +13,10 @@ use Darkroom\ModelBundle\EntityManager\BaseEntityManager;
 use Darkroom\ModelBundle\Entity\EntityInterface;
 
 /**
- * Class BaseCrudController
- * @package Smaloron\Darkroom\AppBundle\Controller
+ * Class AbstractBaseCrudController
+ * @package Darkroom\AppBundle\Controller
  */
-class BaseCrudController extends Controller{
+abstract class AbstractBaseCrudController extends Controller{
 
     /**
      * @var array
