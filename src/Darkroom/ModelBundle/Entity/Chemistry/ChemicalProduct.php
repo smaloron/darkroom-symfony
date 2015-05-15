@@ -2,9 +2,9 @@
 
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
+use Darkroom\ModelBundle\Entity\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Proxies\__CG__\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity
  */
-class ChemicalProduct
+class ChemicalProduct implements EntityInterface
 {
     /**
      * @var integer

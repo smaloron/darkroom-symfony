@@ -2,6 +2,7 @@
 
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
+use Darkroom\ModelBundle\Entity\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="solution_containers", uniqueConstraints={@ORM\UniqueConstraint(name="code", columns={"code"})})
  * @ORM\Entity
  */
-class SolutionContainer
+class SolutionContainer implements EntityInterface
 {
     /**
      * @var integer
