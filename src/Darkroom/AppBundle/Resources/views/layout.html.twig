@@ -1,0 +1,17 @@
+{% extends '::base.html.twig' %}
+
+{% block subnav %}
+        <aside>
+            {% include '@App/_navigation.html.twig' %}
+        </aside>
+{% endblock %}
+
+{% block javascriptsFiles %}
+    {{ parent() }}
+
+    <script>
+        $('.delete-confirm').on('click', function(){
+            return confirm('voulez-vous vraiment supprimer cet enregistrement ?');
+        })
+    </script>
+{% endblock %}
