@@ -6,7 +6,6 @@
     {% block stylesheets %}
         {% stylesheets
         '../vendor/semantic/ui/dist/semantic.css'
-        '%kernel.root_dir%/Resources/public/css/main.css'
         filter='?yui_css, cssrewrite' output='assets/css/minified.css' %}
         <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
         {% endstylesheets %}
