@@ -4,6 +4,7 @@ namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Proxies\__CG__\Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -120,5 +121,21 @@ class ChemicalProduct
         $this->unitCategory = $unitCategory;
 
         return $this;
+    }
+
+    /**
+     * Add a new recipe
+     * @param ChemicalRecipe $recipe
+     */
+    public function addRecipe(ChemicalRecipe $recipe){
+        $this->recipes->add($recipe);
+    }
+
+    /**
+     * Remove a recipe
+     * @param ChemicalRecipe $recipe
+     */
+    public function removeRecipe(ChemicalRecipe $recipe){
+        $this->recipes->removeElement($recipe);
     }
 }
