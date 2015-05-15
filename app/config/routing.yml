@@ -3,7 +3,7 @@ darkroom_app:
     type:     annotation
     prefix:   /
 
-#app:
-#    resource: "@AppBundle/Controller/"
-#    type:     annotation
-#    prefix: /
+darkroom_chemistry:
+    resource: "@DarkroomAppBundle/Controller/Chemistry"
+    type:     annotation
+    prefix:   /chemistry/
