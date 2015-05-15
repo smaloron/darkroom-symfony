@@ -8,7 +8,7 @@ use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-
+use Darkroom\ModelBundle\Entity\EntityInterface;
 /**
  * This class is an abstract entity manager providing the base crud features
  * Class AbstractEntityManager
@@ -87,9 +87,9 @@ class BaseEntityManager
     /**
      * Persist an entity
      *
-     * @param Entity $entity
+     * @param EntityInterface $entity
      */
-    public function persist(Entity $entity)
+    public function persist(EntityInterface $entity)
     {
         $this->em->persist($entity);
     }
@@ -97,9 +97,9 @@ class BaseEntityManager
     /**
      * Delete an entity
      *
-     * @param Entity $entity
+     * @param EntityInterface $entity
      */
-    public function delete($entity)
+    public function delete(EntityInterface $entity)
     {
         $this->em->remove($entity);
     }
@@ -124,12 +124,12 @@ class BaseEntityManager
     /**
      * Create or update an entity
      *
-     * @param Entity  $entity
+     * @param EntityInterface  $entity
      * @param Request $request
      *
      * @return bool|FormInterface
      */
-    public function save($entity, Request $request)
+    public function save(EntityInterface $entity, Request $request)
     {
         $success = false;
         $form = $this->getForm($entity, $this->formOptions);
@@ -146,11 +146,11 @@ class BaseEntityManager
     }
 
     /**
-     * @param Entity $entity
+     * @param EntityInterface $entity
      *
      * @return FormInterface
      */
-    public function getForm($entity)
+    public function getForm(EntityInterface $entity)
     {
         $form = $this->formFactory->create(new $this->formClassName(), $entity, $this->formOptions);
 
@@ -160,7 +160,7 @@ class BaseEntityManager
     /**
      * @param int $id
      *
-     * @return null|Entity
+     * @return null|EntityInterface
      * @throws NotFoundHttpException
      */
     public function getOne($id = null)
