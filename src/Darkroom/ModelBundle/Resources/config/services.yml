@@ -5,8 +5,8 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:UnitCategory"
-      - "Darkroom\ModelBundle\Form\UnitCategoryType"
+      - "DarkroomModelBundle:Chemistry\UnitCategory"
+      - "Darkroom\ModelBundle\Form\Chemistry\UnitCategoryType"
     scope: request
 
   Darkroom.model.manager.unit:
@@ -15,8 +15,8 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:Unit"
-      - "Darkroom\ModelBundle\Form\UnitType"
+      - "DarkroomModelBundle:Chemistry\Unit"
+      - "Darkroom\ModelBundle\Form\Chemistry\UnitType"
     scope: request
 
   Darkroom.model.manager.manufacturer:
@@ -25,8 +25,8 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:Manufacturer"
-      - "Darkroom\ModelBundle\Form\ManufacturerType"
+      - "DarkroomModelBundle:Chemistry\Manufacturer"
+      - "Darkroom\ModelBundle\Form\Chemistry\ManufacturerType"
     scope: request
 
   Darkroom.model.manager.chemical_product:
@@ -35,8 +35,8 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:ChemicalProduct"
-      - "Darkroom\ModelBundle\Form\ChemicalProductType"
+      - "DarkroomModelBundle:Chemistry\ChemicalProduct"
+      - "Darkroom\ModelBundle\Form\Chemistry\ChemicalProductType"
     scope: request
 
   Darkroom.model.manager.chemical_recipe:
@@ -45,8 +45,8 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:ChemicalRecipe"
-      - "Darkroom\ModelBundle\Form\ChemicalRecipeType"
+      - "DarkroomModelBundle:Chemistry\ChemicalRecipe"
+      - "Darkroom\ModelBundle\Form\Chemistry\ChemicalRecipeType"
     scope: request
 
   Darkroom.model.manager.chemical_solution:
@@ -55,8 +55,8 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:ChemicalSolution"
-      - "Darkroom\ModelBundle\Form\ChemicalSolutionType"
+      - "DarkroomModelBundle:Chemistry\ChemicalSolution"
+      - "Darkroom\ModelBundle\Form\Chemistry\ChemicalSolutionType"
     scope: request
 
   Darkroom.model.manager.recipe_category:
@@ -65,8 +65,8 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:RecipeCategory"
-      - "Darkroom\ModelBundle\Form\RecipeCategoryType"
+      - "DarkroomModelBundle:Chemistry\RecipeCategory"
+      - "Darkroom\ModelBundle\Form\Chemistry\RecipeCategoryType"
     scope: request
 
   Darkroom.model.manager.solution_container:
@@ -75,6 +75,6 @@ services:
       - @doctrine.orm.default_entity_manager
       - @form.factory
       - @request
-      - "DarkroomModelBundle:"
-      - "Darkroom\ModelBundle\Form\SolutionContainerType"
+      - "DarkroomModelBundle:Chemistry\SolutionContainer"
+      - "Darkroom\ModelBundle\Form\Chemistry\SolutionContainerType"
     scope: request
