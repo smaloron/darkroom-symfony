@@ -1,0 +1,78 @@
+requires:
+    concat: gulp-concat
+    minify-css: gulp-minify-css
+    freeze: gulp-freeze
+    light-min: gulp-lightmin
+    minify: gulp-minify
+    uglify: gulp-uglify
+    #uncss: gulp-uncss
+mimetypes:
+    css:
+        dev:
+            outputFolder: web/tmp/css
+            webPath:      /tmp/css
+            tasks: []
+
+        prod:
+            outputFolder: web/compiled/css
+            webPath:      /compiled/css
+            tasks:
+                # remove unused css selectors does not work due to a Phantom.js bug
+                #- {name: uncss, args: {html: ['app/Resources/views/**/*;html.twig', 'src/Darkroom/AppBundle/Resources/views/**/*.html.twig' ]}}
+                # This task concats all the files into one
+                - { name: concat, args: '%filename%' }
+                # This task minifies the scripts
+                - { name: light-min }
+                - { name: minify-css }
+                # This is a cache busting gulp plugin that appends
+                #  an md5 of the contents to the filename
+                - { name: freeze }
+        files:
+            styles.css:
+                - app/Resources/libs/semantic-ui/dist/semantic.css
+    js:
+        dev:
+            outputFolder: web/tmp/js
+            webPath:      /tmp/js
+            tasks: []
+        prod:
+            outputFolder: web/compiled/js
+            webPath:      /compiled/js
+            tasks:
+                # This task concats all the files into one
+                - { name: concat, args: '%filename%' }
+                # This task minifies the scripts
+                - { name: uglify }
+                # This is a cache busting gulp plugin that appends
+                #  an md5 of the contents to the filename
+                - { name: freeze }
+        files:
+            libs.js:
+                - app/Resources/libs/jquery/jquery.js
+                - app/Resources/libs/semantic-ui/dist/semantic.js
+    fonts:
+        dev:
+            outputFolder: web/tmp/css/styles.css/themes/default/assets
+            webPath:      /tmp/css/styles.css/themes/default/assets
+            tasks: []
+            autoRenaming: false
+        prod:
+            outputFolder: web/compiled/css/styles.css/themes/default/assets/fonts/
+            webPath:      /compiled/css/styles.css/themes/default/assets/fonts
+            tasks: []
+            autoRenaming: false
+        files:
+            fonts:
+              - app/Resources/libs/semantic-ui/dist/themes/default/assets/fonts/*.*
+
+# This is the list of files/paths to search and find the replacement tags to insert the
+# generated <script> or stylesheet tags
+replacementPaths:
+    - app/Resources/views/*.html.twig
+    - app/Resources/views/**/*.html.twig
+    - src/Darkroom/AppBundle/Resources/views/**/*.html.twig
+
+default:
+    - js
+    - css
+    - fonts

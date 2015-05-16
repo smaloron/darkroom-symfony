@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8"/>
     <title>{% block title %}Darkroom{% endblock %}</title>
-    {% block stylesheets %}
-        {% stylesheets
-        '../vendor/semantic/ui/dist/semantic.css'
-        filter='?yui_css, cssrewrite' output='assets/css/minified.css' %}
-        <link rel="stylesheet" type="text/css" media="screen" href="{{ asset_url }}"/>
-        {% endstylesheets %}
+    {% block styles %}
+        {% if app.environment == 'prod' %}
+            <!-- prod:styles.css -->
+<link rel="stylesheet" href="/compiled/css/styles.css/styles_79f3ef787aaf0ad2cf54400f9a170417.css" />
+<!-- endbuild -->
+        {% else %}
+            <!-- dev:styles.css -->
+<link rel="stylesheet" href="/tmp/css/styles.css/semantic_0.css" />
+<!-- endbuild -->
+        {% endif %}
     {% endblock %}
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
 </head>
@@ -35,12 +39,16 @@
 </footer>
 
 {% block javascriptsFiles %}
-    {% javascripts
-    '../vendor/components/jquery/jquery.js'
-    '../vendor/semantic/ui/dist/semantic.js'
-    filter='?yui_js' output='assets/js/minified.js' %}
-    <script type="text/javascript" src="{{ asset_url }}"></script>
-    {% endjavascripts %}
+    {% if app.environment == 'prod' %}
+        <!-- prod:libs.js -->
+<script src="/compiled/js/libs.js/libs_23851ee393a061c819f817adce0644ef.js"></script>
+<!-- endbuild -->
+    {% else %}
+        <!-- dev:libs.js -->
+<script src="/tmp/js/libs.js/jquery_0.js"></script>
+<script src="/tmp/js/libs.js/semantic_1.js"></script>
+<!-- endbuild -->
+    {% endif %}
 {% endblock %}
 </body>
 </html>
