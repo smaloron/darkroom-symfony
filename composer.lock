@@ -4,50 +4,8 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "33a209906cd13d94ba6abc5a8424f77b",
+    "hash": "d4a1ef5a4be839c7febdec8ec4c3791d",
     "packages": [
-        {
-            "name": "components/jquery",
-            "version": "2.1.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/components/jquery.git",
-                "reference": "7b1d1104656a092423fbfba13c5920e9bbba290c"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/components/jquery/zipball/7b1d1104656a092423fbfba13c5920e9bbba290c",
-                "reference": "7b1d1104656a092423fbfba13c5920e9bbba290c",
-                "shasum": ""
-            },
-            "type": "component",
-            "extra": {
-                "component": {
-                    "scripts": [
-                        "jquery.js"
-                    ],
-                    "files": [
-                        "jquery.min.js",
-                        "jquery.min.map",
-                        "jquery-migrate.js",
-                        "jquery-migrate.min.js"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "John Resig",
-                    "email": "jeresig@gmail.com"
-                }
-            ],
-            "description": "jQuery JavaScript Library",
-            "homepage": "http://jquery.com",
-            "time": "2015-05-08 05:04:47"
-        },
         {
             "name": "doctrine/annotations",
             "version": "v1.2.4",
@@ -1424,43 +1382,6 @@
                 "psr-3"
             ],
             "time": "2012-12-21 11:40:51"
-        },
-        {
-            "name": "semantic/ui",
-            "version": "1.12.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/Semantic-Org/Semantic-UI.git",
-                "reference": "b63c64161f99c0aa3628e1750cd58303a3725077"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/Semantic-Org/Semantic-UI/zipball/b63c64161f99c0aa3628e1750cd58303a3725077",
-                "reference": "b63c64161f99c0aa3628e1750cd58303a3725077",
-                "shasum": ""
-            },
-            "type": "library",
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Jack Lukic",
-                    "email": "jacklukic@gmail.com",
-                    "homepage": "http://www.jacklukic.com",
-                    "role": "Creator"
-                }
-            ],
-            "description": "Semantic empowers designers and developers by creating a shared vocabulary for UI.",
-            "homepage": "http://www.semantic-ui.com",
-            "keywords": [
-                "css",
-                "framework",
-                "semantic",
-                "ui"
-            ],
-            "time": "2015-04-27 00:59:34"
         },
         {
             "name": "sensio/distribution-bundle",

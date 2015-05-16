@@ -1,0 +1,22 @@
+{
+  "name": "darkroom-symfony2",
+  "version": "0",
+  "authors": [
+    "Sebastien Maloron <contact@smaloron.eu>"
+  ],
+  "description": "Darkroom activities manager",
+  "license": "MIT",
+  "dependencies": {
+    "jquery": "1.10.2",
+    "semantic-ui": "latest"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "app/Resources/libs",
+    "test",
+    "tests"
+  ]
+
+}

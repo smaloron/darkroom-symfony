@@ -23,14 +23,7 @@
         "doctrine/data-fixtures" : "dev-master",
         "hautelook/alice-bundle": "0.1.*",
         "doctrine/migrations": "dev-master",
-        "doctrine/doctrine-migrations-bundle": "dev-master",
-        "semantic/ui": "1.12.*",
-        "components/jquery": "2.*"
-
-
-
-
-
+        "doctrine/doctrine-migrations-bundle": "dev-master"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
