@@ -12,3 +12,5 @@
 /composer.phar
 .idea/*
 /app/Resources/libs/*
+web/compiled/*
+web/tmp/*
