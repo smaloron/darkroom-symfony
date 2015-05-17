@@ -14,3 +14,4 @@
 /app/Resources/libs/*
 web/compiled/*
 web/tmp/*
+data/test/*
