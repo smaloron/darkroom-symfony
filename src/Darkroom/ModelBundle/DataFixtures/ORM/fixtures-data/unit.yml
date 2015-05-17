@@ -1,0 +1,36 @@
+Darkroom\ModelBundle\Entity\Chemistry\Unit:
+  Unit0:
+    name: gram
+    abbrev: g
+    conversionRate: 1
+    unitCategory: @UnitCategory0
+  Unit1:
+    name: kilogram
+    abbrev: kg
+    conversionRate: 1000
+    unitCategory: @UnitCategory0
+  Unit2:
+    name: liter
+    abbrev: l
+    conversionRate: 1000
+    unitCategory: @UnitCategory1
+  Unit3:
+    name: milliliter
+    abbrev: ml
+    conversionRate: 1
+    unitCategory: @UnitCategory1
+  Unit4:
+    name: millimeter
+    abbrev: mm
+    conversionRate: 1
+    unitCategory: @UnitCategory2
+  Unit5:
+    name: centimeter
+    abbrev: cm
+    conversionRate: 100
+    unitCategory: @UnitCategory2
+  Unit6:
+    name: meter
+    abbrev: m
+    conversionRate: 1000
+    unitCategory: @UnitCategory2

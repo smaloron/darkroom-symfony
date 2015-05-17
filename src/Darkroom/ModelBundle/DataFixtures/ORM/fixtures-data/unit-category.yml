@@ -1,0 +1,7 @@
+Darkroom\ModelBundle\Entity\Chemistry\UnitCategory:
+  UnitCategory0:
+    name: weight
+  UnitCategory1:
+    name: liquid
+  UnitCategory2:
+    name: length
