@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(
  *  name="units",
  *  indexes={
- *      @ORM\Index(name="unit_parent", columns={"unit_parent"})
+ *      @ORM\Index(name="unit_category_id", columns={"unit_category_id"})
  *  }
  * )
  * @ORM\Entity
