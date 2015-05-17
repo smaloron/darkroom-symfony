@@ -87,9 +87,9 @@ class BaseEntityManager
     /**
      * Persist an entity
      *
-     * @param EntityInterface $entity
+     * @param Entity $entity
      */
-    public function persist(EntityInterface $entity)
+    public function persist( $entity)
     {
         $this->em->persist($entity);
     }
@@ -97,9 +97,9 @@ class BaseEntityManager
     /**
      * Delete an entity
      *
-     * @param EntityInterface $entity
+     * @param Entity $entity
      */
-    public function delete(EntityInterface $entity)
+    public function delete($entity)
     {
         $this->em->remove($entity);
     }

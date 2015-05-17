@@ -68,15 +68,15 @@ abstract class AbstractBaseCrudController extends Controller{
     }
 
     /**
-     * @param EntityInterface $entity
+     * @param int $id
      *
      * @Route("/delete/{id}", requirements={"id"="\d+"})
      * @return RedirectResponse
      */
-    public function deleteAction(EntityInterface $entity)
+    public function deleteAction($id)
     {
         $entityManager = $this->getEntityManager();
-
+        $entity = $entityManager->getOneById($id);
         $entityManager->delete($entity);
         $entityManager->flush();
 
