@@ -44,6 +44,6 @@ class UnitType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_unit';
+        return 'darkroom_modelbundle_unit';
     }
 }

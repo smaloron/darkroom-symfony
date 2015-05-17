@@ -36,6 +36,6 @@ class SolutionContainerType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_solutioncontainer';
+        return 'darkroom_modelbundle_solutioncontainer';
     }
 }

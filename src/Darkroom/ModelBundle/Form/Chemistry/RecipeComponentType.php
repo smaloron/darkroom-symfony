@@ -58,6 +58,6 @@ class RecipeComponentType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_recipecomponent';
+        return 'darkroom_modelbundle_recipecomponent';
     }
 }

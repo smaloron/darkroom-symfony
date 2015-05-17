@@ -40,6 +40,6 @@ class UnitCategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_unitCategory';
+        return 'darkroom_modelbundle_unitCategory';
     }
 }

@@ -41,6 +41,6 @@ class SolutionComponentType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_solutioncomponent';
+        return 'darkroom_modelbundle_solutioncomponent';
     }
 }

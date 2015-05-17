@@ -40,6 +40,6 @@ class ManufacturerType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_manufacturer';
+        return 'darkroom_modelbundle_manufacturer';
     }
 }

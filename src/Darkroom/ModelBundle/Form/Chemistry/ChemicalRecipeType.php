@@ -66,6 +66,6 @@ class ChemicalRecipeType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_chemicalrecipe';
+        return 'darkroom_modelbundle_chemicalrecipe';
     }
 }

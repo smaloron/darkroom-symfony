@@ -46,6 +46,6 @@ class ChemicalProductType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_chemicalproduct';
+        return 'darkroom_modelbundle_chemicalproduct';
     }
 }

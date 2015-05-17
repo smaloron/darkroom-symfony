@@ -34,6 +34,6 @@ class RecipeCategoryType extends AbstractType
      */
     public function getName()
     {
-        return 'smaloron_darkroom_modelsbundle_recipecategory';
+        return 'darkroom_modelbundle_recipecategory';
     }
 }
