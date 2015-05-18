@@ -1,80 +1,30 @@
+parameters:
+    darkroom.default.entitymanager.class: Darkroom\ModelBundle\EntityManager\DefaultEntityManager
+    darkroom.default.formhandler.class: Darkroom\ModelBundle\FormHandler\DefaultFormHandler
+    darkroom.unitcategory.type.class: Darkroom\ModelBundle\Form\Chemistry\UnitCategoryType
+    darkroom.unitcategory.model.class: Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
+
 services:
-  Darkroom.model.manager.unitCategory:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\UnitCategory"
-      - "Darkroom\ModelBundle\Form\Chemistry\UnitCategoryType"
-    scope: request
 
-  Darkroom.model.manager.unit:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\Unit"
-      - "Darkroom\ModelBundle\Form\Chemistry\UnitType"
-    scope: request
+  darkroom.unitcategory.form.type:
+      class: %darkroom.unitcategory.type.class%
+      arguments: [%darkroom.unitcategory.model.class%]
+      tags:
+          - { name: form.type , alias: darkroom_modelbundle_unitCategory }
 
-  Darkroom.model.manager.manufacturer:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\Manufacturer"
-      - "Darkroom\ModelBundle\Form\Chemistry\ManufacturerType"
-    scope: request
+  darkroom.unitcategory.form:
+      class: Symfony\Component\Form\Form
+      arguments: ["@darkroom.unitcategory.form.type"]
+      factory_method: create
+      factory_service: form.factory
 
-  Darkroom.model.manager.chemical_product:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\ChemicalProduct"
-      - "Darkroom\ModelBundle\Form\Chemistry\ChemicalProductType"
-    scope: request
+  darkroom.unitcategory.form.handler:
+      class: %darkroom.default.formhandler.class%
+      scope: request
+      arguments: ["@darkroom.unitcategory.form", "@request","@darkroom.unitcategory.entitymanager"]
 
-  Darkroom.model.manager.chemical_recipe:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\ChemicalRecipe"
-      - "Darkroom\ModelBundle\Form\Chemistry\ChemicalRecipeType"
-    scope: request
-
-  Darkroom.model.manager.chemical_solution:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\ChemicalSolution"
-      - "Darkroom\ModelBundle\Form\Chemistry\ChemicalSolutionType"
-    scope: request
-
-  Darkroom.model.manager.recipe_category:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\RecipeCategory"
-      - "Darkroom\ModelBundle\Form\Chemistry\RecipeCategoryType"
-    scope: request
-
-  Darkroom.model.manager.solution_container:
-    class: Darkroom\ModelBundle\EntityManager\BaseEntityManager
-    arguments:
-      - @doctrine.orm.default_entity_manager
-      - @form.factory
-      - @request
-      - "DarkroomModelBundle:Chemistry\SolutionContainer"
-      - "Darkroom\ModelBundle\Form\Chemistry\SolutionContainerType"
-    scope: request
+  darkroom.unitcategory.entitymanager:
+      class: %darkroom.default.entitymanager.class%
+      arguments:
+        - @doctrine.orm.default_entity_manager
+        - "DarkroomModelBundle:Chemistry\UnitCategory"
