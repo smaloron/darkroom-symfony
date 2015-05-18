@@ -1,8 +1,11 @@
 parameters:
     darkroom.default.entitymanager.class: Darkroom\ModelBundle\EntityManager\DefaultEntityManager
     darkroom.default.formhandler.class: Darkroom\ModelBundle\FormHandler\DefaultFormHandler
+
     darkroom.unitcategory.type.class: Darkroom\ModelBundle\Form\Chemistry\UnitCategoryType
     darkroom.unitcategory.model.class: Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
+    darkroom.manufacturer.type.class: Darkroom\ModelBundle\Form\Chemistry\ManufacturerType
+    darkroom.manufacturer.model.class: Darkroom\ModelBundle\Entity\Chemistry\Manufacturer
 
 services:
 
@@ -28,3 +31,26 @@ services:
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\UnitCategory"
+
+  darkroom.manufacturer.form.type:
+      class: %darkroom.manufacturer.type.class%
+      arguments: [%darkroom.manufacturer.model.class%]
+      tags:
+          - { name: form.type , alias: darkroom_modelbundle_manufacturer }
+
+  darkroom.manufacturer.form:
+      class: Symfony\Component\Form\Form
+      arguments: ["@darkroom.manufacturer.form.type"]
+      factory_method: create
+      factory_service: form.factory
+
+  darkroom.manufacturer.form.handler:
+      class: %darkroom.default.formhandler.class%
+      scope: request
+      arguments: ["@darkroom.manufacturer.form", "@request","@darkroom.manufacturer.entitymanager"]
+
+  darkroom.manufacturer.entitymanager:
+      class: %darkroom.default.entitymanager.class%
+      arguments:
+        - @doctrine.orm.default_entity_manager
+        - "DarkroomModelBundle:Chemistry\Manufacturer"
