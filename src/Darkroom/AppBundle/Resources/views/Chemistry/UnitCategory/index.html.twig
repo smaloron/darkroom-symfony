@@ -36,7 +36,13 @@
     <!-- Form -->
     <div class="height wide column">
         <h3>New category</h3>
-        {{ form(form) }}
+        <form action="{{ action }}" method="POST" class="ui form">
+            {{ form_errors(form) }}
+
+            {{ form_row(form.name) }}
+
+            {{ form_rest(form) }}
+        </form>
     </div>
 
 </div>

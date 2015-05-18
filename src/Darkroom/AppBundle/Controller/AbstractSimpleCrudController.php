@@ -132,7 +132,7 @@ abstract class AbstractSimpleCrudController extends Controller {
             $form = $this->get($this->formServiceName);
         }
 
-        return array( 'data' => $records, 'form' => $form->createView(), 'action' => $action );
+        return array( 'model' => $records, 'form' => $form->createView(), 'action' => $action );
     }
 
     /**
@@ -172,6 +172,7 @@ abstract class AbstractSimpleCrudController extends Controller {
      */
     public function deleteAction($id){
         $this->getEntityManager()->deleteById($id);
+        $this->getEntityManager()->flush();
         return $this->redirectToRoute($this->baseRoute.'_index');
     }
 
