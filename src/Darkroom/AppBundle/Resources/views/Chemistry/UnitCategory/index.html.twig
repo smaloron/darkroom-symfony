@@ -36,24 +36,7 @@
     <!-- Form -->
     <div class="height wide column">
         <h3>New category</h3>
-
-        {{ form_start(form, {
-            attr:{  'class':    'ui small form test',
-                    'method':   'POST',
-                }
-            })
-        }}
-
-        {{ form_errors(form) }}
-
-        {{ form_row(form.name)}}
-
-        {{ form_row(form.save) }}
-
-        {{ form_rest(form) }}
-
-        {{ form_end(form) }}
-
+        {{ form(form) }}
     </div>
 
 </div>

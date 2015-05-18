@@ -29,6 +29,10 @@ framework:
 twig:
     debug:            "%kernel.debug%"
     strict_variables: "%kernel.debug%"
+    form:
+        resources:
+            - DarkroomAppBundle:Templates:form-template.html.twig
+
 
 # Doctrine Configuration
 doctrine:
