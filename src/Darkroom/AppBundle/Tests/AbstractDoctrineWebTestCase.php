@@ -3,6 +3,7 @@
 namespace Darkroom\AppBundle\Tests;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\Entity;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
@@ -164,7 +165,7 @@ class AbstractDoctrineWebTestCase extends WebTestCase
         $this->assertInTable($crawler, $this->updateValue);
 
         //Try to delete the entity
-        $crawler = $this->client->request('GET', $this->baseRoute. 'delete/'. $entityId);
+        $this->client->request('GET', $this->baseRoute. 'delete/'. $entityId);
         $crawler = $this->client->followRedirect();
         //Check if the entity is actually updated
         $this->assertNotInTable($crawler, $this->updateValue);
