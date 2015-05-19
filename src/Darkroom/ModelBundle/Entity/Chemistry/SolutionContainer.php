@@ -6,12 +6,14 @@ use Darkroom\ModelBundle\Entity\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * SolutionContainer
  *
  * @ORM\Table(name="solution_containers", uniqueConstraints={@ORM\UniqueConstraint(name="code", columns={"code"})})
  * @ORM\Entity
+ * @UniqueEntity(fields="code", message="The container code must be unique")
  */
 class SolutionContainer implements EntityInterface
 {
@@ -30,7 +32,7 @@ class SolutionContainer implements EntityInterface
      * @Assert\NotBlank()
      * @Assert\Length(max=15)
      *
-     * @ORM\Column(name="code", type="string", length=15, nullable=false)
+     * @ORM\Column(name="code", type="string", length=15, nullable=false, unique=true)
      */
     private $code;
 

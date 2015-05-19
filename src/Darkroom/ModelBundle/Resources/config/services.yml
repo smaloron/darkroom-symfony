@@ -12,6 +12,8 @@ parameters:
     darkroom.recipecategory.model.class: Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory
     darkroom.chemicalproduct.type.class: Darkroom\ModelBundle\Form\Chemistry\ChemicalProductType
     darkroom.chemicalproduct.model.class: Darkroom\ModelBundle\Entity\Chemistry\ChemicalProduct
+    darkroom.solutioncontainer.type.class: Darkroom\ModelBundle\Form\Chemistry\SolutionContainerType
+    darkroom.solutioncontainer.model.class: Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer
 
 
 services:
@@ -135,3 +137,27 @@ services:
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\ChemicalProduct"
+
+# Solution Container
+  darkroom.solutioncontainer.form.type:
+      class: %darkroom.solutioncontainer.type.class%
+      arguments: [%darkroom.solutioncontainer.model.class%]
+      tags:
+          - { name: form.type , alias: darkroom_modelbundle_solutioncontainer }
+
+  darkroom.solutioncontainer.form:
+      class: Symfony\Component\Form\Form
+      arguments: ["@darkroom.solutioncontainer.form.type"]
+      factory_method: create
+      factory_service: form.factory
+
+  darkroom.solutioncontainer.form.handler:
+      class: %darkroom.default.formhandler.class%
+      scope: request
+      arguments: ["@darkroom.solutioncontainer.form", "@request","@darkroom.solutioncontainer.entitymanager"]
+
+  darkroom.solutioncontainer.entitymanager:
+      class: %darkroom.default.entitymanager.class%
+      arguments:
+        - @doctrine.orm.default_entity_manager
+        - "DarkroomModelBundle:Chemistry\SolutionContainer"

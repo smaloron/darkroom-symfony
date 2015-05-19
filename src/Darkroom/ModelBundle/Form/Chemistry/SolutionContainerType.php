@@ -17,7 +17,7 @@ class SolutionContainerType extends AbstractType
         $builder
             ->add('code', 'text')
             ->add('volumeCapacity', 'number')
-            ->add('note', 'textarea')
+            ->add('note', 'textarea', array('required' => false))
             ->add('save', 'submit');
     }
     

@@ -1,0 +1,52 @@
+{% extends '@DarkroomApp/Chemistry/layout.html.twig' %}
+
+{% block body %}
+
+
+<div class="ui grid centered">
+
+    <!-- List of unit categories -->
+    <div class="six wide column">
+        <table class="ui striped table">
+            <caption><h3>Solution containers list</h3></caption>
+            <thead>
+            <tr>
+                <th>Name</th>
+                <th>Volume capacity</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in model %}
+                <tr>
+                    <td>{{ item.code }}</td>
+                    <td>{{ item.volumeCapacity }}</td>
+                    <td>
+                        <a class="delete-confirm" href={{ path('darkroom_app_chemistry_solutioncontainer_delete', {id: item.id}) }}>
+                            <i class="minus square icon"></i>
+                        </a>
+                        <a class="" href={{ path('darkroom_app_chemistry_solutioncontainer_index_1', {id: item.id}) }}>
+                            <i class="edit icon"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Form -->
+    <div class="height wide column">
+        <h3>New solution container</h3>
+        <form action="{{ action }}" method="POST" class="ui form">
+            {{ form_errors(form) }}
+
+            {{ form_row(form.code) }}
+
+            {{ form_rest(form) }}
+        </form>
+    </div>
+
+</div>
+
+{% endblock %}
