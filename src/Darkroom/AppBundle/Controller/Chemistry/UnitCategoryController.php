@@ -10,16 +10,12 @@ use Darkroom\AppBundle\Controller\AbstractSimpleCrudController;
  * It exposes CRUD functionality
  * Class UnitCategoryController
  * @package Darkroom\AppBundle\Controller
+ *
  * @Route("unit-category")
  */
 class UnitCategoryController extends AbstractSimpleCrudController
 {
-
-    public function __construct(){
-        $this->baseServicesName = 'darkroom.unitcategory';
-        $this->baseRoute = 'darkroom_app_chemistry_unitcategory';
-        $this->controllerName = 'DarkroomAppBundle:Chemistry/UnitCategory';
-
-        parent::__construct();
-    }
+    protected $baseServicesName = 'darkroom.unitcategory';
+    protected $baseRoute = 'darkroom_app_chemistry_unitcategory';
+    protected $controllerName = 'DarkroomAppBundle:Chemistry/UnitCategory';
 }
