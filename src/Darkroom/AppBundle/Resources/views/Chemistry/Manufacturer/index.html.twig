@@ -7,7 +7,7 @@
     <!-- List of unit categories -->
     <div class="six wide column">
         <table class="ui striped table">
-            <caption><h3>Unit's category list</h3></caption>
+            <caption><h3>Manufacturers list</h3></caption>
             <thead>
             <tr>
                 <th>Name</th>
@@ -19,10 +19,10 @@
                 <tr>
                     <td>{{ item.name }}</td>
                     <td>
-                        <a class="delete-confirm" href={{ path('darkroom_app_chemistry_unitcategory_delete', {id: item.id}) }}>
+                        <a class="delete-confirm" href={{ path('darkroom_app_chemistry_manufacturer_delete', {id: item.id}) }}>
                             <i class="minus square icon"></i>
                         </a>
-                        <a class="" href={{ path('darkroom_app_chemistry_unitcategory_index_1', {id: item.id}) }}>
+                        <a class="" href={{ path('darkroom_app_chemistry_manufacturer_index_1', {id: item.id}) }}>
                             <i class="edit icon"></i>
                         </a>
                     </td>
