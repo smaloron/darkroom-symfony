@@ -22,7 +22,7 @@ class UnitType extends AbstractType
                 'unitCategory',
                 'entity',
                 array(
-                    'class' => 'DarkroomModelsBundle:UnitCategory',
+                    'class' => 'DarkroomModelBundle:Chemistry\UnitCategory',
                     'property' => 'name',
                 )
             )
