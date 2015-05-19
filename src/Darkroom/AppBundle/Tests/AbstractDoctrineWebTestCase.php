@@ -6,7 +6,14 @@ use Doctrine\ORM\EntityManager;
 use Symfony\Bundle\FrameworkBundle\Client;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class AbstractDoctrineWebTestCase extends WebTestCase{
+/**
+ * This abstract class provides helper for functional tests
+ *
+ * Class AbstractDoctrineWebTestCase
+ * @package Darkroom\AppBundle\Tests
+ */
+class AbstractDoctrineWebTestCase extends WebTestCase
+{
     /**
      * helper to acccess EntityManager
      * @var EntityManager
