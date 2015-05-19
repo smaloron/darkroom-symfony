@@ -4,8 +4,6 @@ namespace Darkroom\AppBundle\Tests\Controller\Chemistry;
 
 use Darkroom\AppBundle\Tests\AbstractDoctrineWebTestCase;
 use Darkroom\ModelBundle\Entity\Chemistry\UnitCategory;
-use Doctrine\ORM\EntityRepository;
-use Symfony\Component\HttpFoundation\Response;
 
 class UnitControllerTest extends AbstractDoctrineWebTestCase
 {

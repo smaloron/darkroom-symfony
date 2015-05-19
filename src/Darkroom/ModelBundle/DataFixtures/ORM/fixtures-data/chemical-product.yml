@@ -1,0 +1,25 @@
+Darkroom\ModelBundle\Entity\Chemistry\ChemicalProduct:
+  ChemicalProduct0:
+    name: sodium sulfite
+    unitCategory: @UnitCategory0
+  ChemicalProduct1:
+    name: sodium carbonate
+    unitCategory: @UnitCategory0
+  ChemicalProduct2:
+    name: sodium hydroxyde
+    unitCategory: @UnitCategory0
+  ChemicalProduct3:
+    name: hydroquinone
+    unitCategory: @UnitCategory0
+  ChemicalProduct4:
+    name: metol
+    unitCategory: @UnitCategory0
+  ChemicalProduct5:
+    name: sodium bromide
+    unitCategory: @UnitCategory0
+  ChemicalProduct6:
+    name: phenidone
+    unitCategory: @UnitCategory0
+  ChemicalProduct7:
+    name: sodium chloride
+    unitCategory: @UnitCategory0
