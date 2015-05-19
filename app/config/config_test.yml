@@ -19,6 +19,7 @@ doctrine:
     dbal:
         driver: pdo_sqlite
         path: %kernel.root_dir%/../data/%kernel.environment%/database.sqlite
+        charset: utf8
     orm:
         auto_generate_proxy_classes: true
         auto_mapping: true

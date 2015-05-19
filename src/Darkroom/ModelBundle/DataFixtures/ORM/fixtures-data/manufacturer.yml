@@ -1,0 +1,25 @@
+Darkroom\ModelBundle\Entity\Chemistry\Manufacturer:
+  Manufacturer0:
+    name: Ilford
+  Manfacturer1:
+    name: Kodak
+  Manufacturer2:
+    name: Foma
+  Manufacturer3:
+    name: Rollei
+  Manfacturer4:
+    name: Moersch
+  Manufacturer5:
+    name: Labo Partner
+  Manufacturer6:
+    name: Tetenal
+  Manfacturer7:
+    name: FotoSpeed
+  Manufacturer8:
+    name: Acufine
+  Manufacturer9:
+    name: Edwal
+  Manfacturer10:
+    name: Agfa
+  Manufacturer11:
+    name: Champion

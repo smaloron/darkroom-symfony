@@ -20,8 +20,7 @@ class AbstractDoctrineWebTestCase extends WebTestCase{
     protected $client;
 
     /**
-     * Before each test we start a new transaction
-     * everything done in the test will be canceled ensuring isolation et speed
+     * get the entity manager and client on setup
      */
     protected function setUp()
     {
@@ -30,19 +29,6 @@ class AbstractDoctrineWebTestCase extends WebTestCase{
         $this->em = static::$kernel->getContainer()
             ->get('doctrine')
             ->getManager();
-        //$this->em->beginTransaction();
     }
 
-    /**
-     * After each test, a rollback reset the state of
-     * the database
-     */
-    protected function tearDown()
-    {
-        parent::tearDown();
-        //$this->em->rollback();
-        //$this->em->close();
-
-
-    }
 }

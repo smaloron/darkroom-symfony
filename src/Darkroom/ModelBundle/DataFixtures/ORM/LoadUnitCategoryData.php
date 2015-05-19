@@ -11,6 +11,7 @@ class LoadUnitCategoryData extends DataFixtureLoader
         return array(
             __DIR__.'/fixtures-data/unit-category.yml',
             __DIR__.'/fixtures-data/unit.yml',
+            __DIR__.'/fixtures-data/manufacturer.yml',
         );
     }
 }
