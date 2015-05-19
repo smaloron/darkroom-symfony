@@ -1,0 +1,21 @@
+Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory:
+  RecipeCategory0:
+    name: Fixer
+  RecipeCategory1:
+    name: Stop bath
+  RecipeCategory2:
+    name: Film developer
+  RecipeCategory3:
+    name: Print developer
+  RecipeCategory4:
+    name: Lith developer
+  RecipeCategory5:
+    name: Wetting agent
+  RecipeCategory6:
+    name: Hypo clearing bath
+  RecipeCategory7:
+    name: Toner
+  RecipeCategory8:
+    name: Reducer
+  RecipeCategory9:
+    name: Hardeners

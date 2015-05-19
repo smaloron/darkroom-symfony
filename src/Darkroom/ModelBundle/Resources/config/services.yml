@@ -8,6 +8,8 @@ parameters:
     darkroom.unit.model.class: Darkroom\ModelBundle\Entity\Chemistry\Unit
     darkroom.manufacturer.type.class: Darkroom\ModelBundle\Form\Chemistry\ManufacturerType
     darkroom.manufacturer.model.class: Darkroom\ModelBundle\Entity\Chemistry\Manufacturer
+    darkroom.recipecategory.type.class: Darkroom\ModelBundle\Form\Chemistry\RecipeCategoryType
+    darkroom.recipecategory.model.class: Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory
 
 services:
 
@@ -82,3 +84,27 @@ services:
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\Manufacturer"
+
+# Recipe category
+  darkroom.recipecategory.form.type:
+      class: %darkroom.recipecategory.type.class%
+      arguments: [%darkroom.recipecategory.model.class%]
+      tags:
+          - { name: form.type , alias: darkroom_modelbundle_recipecategory }
+
+  darkroom.recipecategory.form:
+      class: Symfony\Component\Form\Form
+      arguments: ["@darkroom.recipecategory.form.type"]
+      factory_method: create
+      factory_service: form.factory
+
+  darkroom.recipecategory.form.handler:
+      class: %darkroom.default.formhandler.class%
+      scope: request
+      arguments: ["@darkroom.recipecategory.form", "@request","@darkroom.recipecategory.entitymanager"]
+
+  darkroom.recipecategory.entitymanager:
+      class: %darkroom.default.entitymanager.class%
+      arguments:
+        - @doctrine.orm.default_entity_manager
+        - "DarkroomModelBundle:Chemistry\RecipeCategory"
