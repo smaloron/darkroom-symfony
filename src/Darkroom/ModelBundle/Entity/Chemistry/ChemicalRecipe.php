@@ -102,19 +102,19 @@ class ChemicalRecipe implements EntityInterface
 
     /**
      * Add a new component to the recipe
-     * @param SolutionComponent $component
+     * @param RecipeComponent $component
      * @return $this
      */
-    public function addComponent(SolutionComponent $component){
+    public function addComponent(RecipeComponent $component){
         $this->components->add($component);
         return $this;
     }
 
     /**
      * Remove a component from the recipe
-     * @param SolutionComponent $component
+     * @param RecipeComponent $component
      */
-    public function removeComponent(SolutionComponent $component){
+    public function removeComponent(RecipeComponent $component){
         $this->components->removeElement($component);
     }
 
