@@ -6,12 +6,14 @@ use Darkroom\ModelBundle\Entity\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * RecipeCategory
  *
  * @ORM\Table(name="recipe_categories")
  * @ORM\Entity
+ * @UniqueEntity(fields="name", message="The recipe category must be unique")
  */
 class RecipeCategory implements EntityInterface
 {
@@ -29,7 +31,7 @@ class RecipeCategory implements EntityInterface
      * @Assert\NotBlank()
      * @Assert\Length(max="50")
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=50, nullable=false, unique=true)
      */
     private $name;
 

@@ -5,12 +5,14 @@ namespace Darkroom\ModelBundle\Entity\Chemistry;
 use Darkroom\ModelBundle\Entity\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * UnitCategory
  *
  * @ORM\Table(name="unit_categories")
  * @ORM\Entity
+ * @UniqueEntity(fields="name", message="The unit category must be unique")
  */
 class UnitCategory implements EntityInterface
 {
@@ -28,7 +30,7 @@ class UnitCategory implements EntityInterface
      * @Assert\NotBlank()
      * @Assert\Length(max=50)
      *
-     * @ORM\Column(name="name", type="string", length=50, nullable=false)
+     * @ORM\Column(name="name", type="string", length=50, nullable=false, unique=true)
      */
     private $name;
 
