@@ -35,7 +35,10 @@
 
     <!-- Form -->
     <div class="height wide column">
-        <h3>New chemical product</h3>
+        <h3>
+            {% if (id is defined and id > 0)%} Update {% else %} New {% endif %}
+            chemical product
+        </h3>
         <form action="{{ action }}" method="POST" class="ui form">
             {{ form_errors(form) }}
 

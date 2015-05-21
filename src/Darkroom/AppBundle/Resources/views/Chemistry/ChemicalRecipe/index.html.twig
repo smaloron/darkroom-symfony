@@ -47,7 +47,10 @@
     <div class="ui modal" id="ModalForm">
             <i class="close icon"></i>
             <div class="header">
-        <h3>New chemical recipe</h3>
+        <h3>
+            {% if (id is defined and id > 0)%} Update {% else %} New {% endif %}
+            chemical recipe
+        </h3>
                 </div>
             <div class="content">
         <form action="{{ action }}" method="POST" class="ui form">
