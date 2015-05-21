@@ -568,7 +568,7 @@ class ChemicalSolution implements EntityInterface
      *
      * @Assert\True()
      */
-    public function checkContainerVolume(){
+    public function isContainerVolumeValid(){
         $check = true;
         if($this->container != null){
             $containerVolume = $this->container->getVolumeCapacity();
@@ -585,7 +585,7 @@ class ChemicalSolution implements EntityInterface
      *
      * @Assert\True()
      */
-    public function checkComponentsVolume(){
+    public function isComponentVolumeValid(){
         return $this->waterVolume + $this->getComponentsVolume() == $this->initialVolume;
     }
 
