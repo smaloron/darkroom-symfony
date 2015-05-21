@@ -23,3 +23,5 @@ Darkroom\ModelBundle\Entity\Chemistry\Manufacturer:
     name: Agfa
   Manufacturer11:
     name: Champion
+  Manufacturer12:
+    name: Home made

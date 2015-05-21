@@ -26,8 +26,8 @@ class RecipeComponent implements EntityInterface
     /**
      * @var float
      *
-     * @Assert\NotBlank()
-     * @Assert\GreaterThan(value=0)
+     * @Assert\NotBlank(message="the quantity cannot be empty")
+     * @Assert\GreaterThan(value=0, message="the quantity must be greater than 0")
      *
      * @ORM\Column(name="quantity", type="float", precision=10, scale=0, nullable=false)
      */
@@ -36,7 +36,7 @@ class RecipeComponent implements EntityInterface
     /**
      * @var ChemicalProduct
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="you must choose a chemical product")
      *
      * @ORM\ManyToOne(targetEntity="ChemicalProduct", inversedBy="recipes")
      * @ORM\JoinColumns({
@@ -48,9 +48,7 @@ class RecipeComponent implements EntityInterface
     /**
      * @var ChemicalRecipe
      *
-     * @Assert\NotBlank()
-     *
-     * @ORM\ManyToOne(targetEntity="ChemicalRecipe")
+     * @ORM\ManyToOne(targetEntity="ChemicalRecipe", inversedBy="components")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
      * })
@@ -60,7 +58,7 @@ class RecipeComponent implements EntityInterface
     /**
      * @var Unit
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="You must choose a unit")
      *
      * @ORM\ManyToOne(targetEntity="Unit")
      * @ORM\JoinColumns({
@@ -178,7 +176,7 @@ class RecipeComponent implements EntityInterface
      * @Assert\True()
      * @return bool
      */
-    public function checkUnitCategory(){
+    public function isUnitCategoryValid(){
         $chemicalUnitCategory = $this->getChemical()->getUnitCategory()->getId();
         $componentUnitCategory = $this->getUnit()->getUnitCategory()->getId();
 

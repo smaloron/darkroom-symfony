@@ -126,7 +126,7 @@ abstract class AbstractSimpleCrudController extends Controller {
 
         $action = $this->generateUrl($this->baseRoute.'_persist', array('id' => $id));
 
-        return array( 'model' => $records, 'form' => $form->createView(), 'action' => $action );
+        return array( 'model' => $records, 'form' => $form->createView(), 'action' => $action, 'id' =>$id );
     }
 
     /**

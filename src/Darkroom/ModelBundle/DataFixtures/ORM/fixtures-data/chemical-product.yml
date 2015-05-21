@@ -9,17 +9,30 @@ Darkroom\ModelBundle\Entity\Chemistry\ChemicalProduct:
     name: sodium hydroxyde
     unitCategory: @UnitCategory0
   ChemicalProduct3:
-    name: hydroquinone
+    name: sodium bromide
     unitCategory: @UnitCategory0
   ChemicalProduct4:
-    name: metol
+    name: sodium thiosulfate
     unitCategory: @UnitCategory0
   ChemicalProduct5:
-    name: sodium bromide
+    name: hydroquinone
     unitCategory: @UnitCategory0
   ChemicalProduct6:
     name: phenidone
     unitCategory: @UnitCategory0
   ChemicalProduct7:
-    name: sodium chloride
+    name: metol
     unitCategory: @UnitCategory0
+  ChemicalProduct8:
+    name: potassium bromide
+    unitCategory: @UnitCategory0
+  ChemicalProduct9:
+    name: potassium carbonate
+    unitCategory: @UnitCategory0
+  ChemicalProduct10:
+    name: water
+    unitCategory: @UnitCategory1
+  ChemicalProduct11:
+    name: acetic acid
+    unitCategory: @UnitCategory1
+

@@ -22,17 +22,17 @@ class DefaultEntityManager implements EntityManagerInterface
     /**
      * @var EntityManager
      */
-    private $entityManager;
+    protected $entityManager;
 
     /**
      * @var string
      */
-    private $entityName;
+    protected $entityName;
 
     /**
      * @var EntityRepository
      */
-    private $repository;
+    protected $repository;
 
     /**
      * @param EntityManager $entityManager
@@ -73,10 +73,17 @@ class DefaultEntityManager implements EntityManagerInterface
     }
 
     /**
-     * @param $id
+     * @param int $id
      */
     public function deleteById($id){
         $entity = $this->getOneById($id);
+        $this->entityManager->remove($entity);
+    }
+
+    /**
+     * @param $entity
+     */
+    public function delete($entity){
         $this->entityManager->remove($entity);
     }
 

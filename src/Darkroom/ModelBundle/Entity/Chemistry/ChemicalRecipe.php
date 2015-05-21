@@ -65,7 +65,7 @@ class ChemicalRecipe implements EntityInterface
 
     /**
      * @var ArrayCollection
-     * @ORM\OneToMany(targetEntity="RecipeComponent", cascade={"persist"}, mappedBy="recipe")
+     * @ORM\OneToMany(targetEntity="RecipeComponent", mappedBy="recipe")
      */
     private $components;
 
@@ -113,9 +113,11 @@ class ChemicalRecipe implements EntityInterface
     /**
      * Remove a component from the recipe
      * @param RecipeComponent $component
+     * @return $this
      */
     public function removeComponent(RecipeComponent $component){
         $this->components->removeElement($component);
+        return $this;
     }
 
     /**

@@ -23,15 +23,6 @@ class RecipeComponentType extends AbstractType
                     'property'  => 'name',
                 )
             )
-            /*
-            ->add(
-                'recipe',
-                'entity',
-                array(
-                    'class'     => 'Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe',
-                    'property'  => 'name',
-                )
-            )*/
             ->add('quantity', 'number')
             ->add(
                 'unit',

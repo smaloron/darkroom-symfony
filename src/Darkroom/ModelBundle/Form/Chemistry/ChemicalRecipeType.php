@@ -46,6 +46,7 @@ class ChemicalRecipeType extends AbstractType
                     'allow_delete' => true,
                     'by_reference' => false,
                     'prototype' => true,
+                    'cascade_validation' => true,
                 )
             )
             ->add('save', 'submit');
@@ -58,6 +59,7 @@ class ChemicalRecipeType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe',
+            'cascade_validation' => true,
         ));
     }
 

@@ -1,0 +1,45 @@
+Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe:
+  ChemicalRecipe0:
+    name: home made fixer
+    recipeCategory: @RecipeCategory0
+    manufacturer: @Manufacturer12
+  ChemicalRecipe1:
+    name: Rapid fixer
+    manufacturer: @Manufacturer0
+    recipeCategory: @RecipeCategory0
+  ChemicalRecipe2:
+    name: D23
+    recipeCategory: @RecipeCategory2
+    manufacturer: @Manufacturer12
+
+Darkroom\ModelBundle\Entity\Chemistry\RecipeComponent:
+  RecipeComponent0:
+    recipe: @ChemicalRecipe0
+    chemical: @ChemicalProduct0
+    quantity: 15
+    unit: @Unit0
+  RecipeComponent1:
+    recipe: @ChemicalRecipe0
+    chemical: @ChemicalProduct4
+    quantity: 240
+    unit: @Unit0
+  RecipeComponent2:
+    recipe: @ChemicalRecipe0
+    chemical: @ChemicalProduct11
+    quantity: 48
+    unit: @Unit2
+  RecipeComponent3:
+    recipe: @ChemicalRecipe0
+    chemical: @ChemicalProduct7
+    quantity: 10
+    unit: @Unit0
+  RecipeComponent4:
+    recipe: @ChemicalRecipe2
+    chemical: @ChemicalProduct0
+    quantity: 100
+    unit: @Unit0
+  RecipeComponent5:
+    recipe: @ChemicalRecipe2
+    chemical: @ChemicalProduct10
+    quantity: 1000
+    unit: @Unit2
