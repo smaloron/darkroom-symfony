@@ -173,7 +173,7 @@ class RecipeComponent implements EntityInterface
     /**
      * Check if the unit category of the choosen unit matches
      * with the unit category of the chemical product
-     * @Assert\True()
+     * @Assert\True(message="This unit is not allowed for this chemical product")
      * @return bool
      */
     public function isUnitCategoryValid(){

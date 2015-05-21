@@ -139,8 +139,8 @@ class SolutionComponent implements EntityInterface
 
     /**
      * Check if the choosen volume of the component is coherent
-     * with the avalaible volume of the component solution
-     * @Assert\True()
+     * with the available volume of the component solution
+     * @Assert\True(message="The component volume cannot be greater than the available volume of the solution")
      *
      * @return bool
      */

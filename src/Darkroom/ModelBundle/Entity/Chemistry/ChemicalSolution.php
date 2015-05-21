@@ -566,7 +566,7 @@ class ChemicalSolution implements EntityInterface
      * Check if the container's capacity matches with the solution's volume
      * @return bool
      *
-     * @Assert\True()
+     * @Assert\True(message="The container's capacity does not match with the solution's volume")
      */
     public function isContainerVolumeValid(){
         $check = true;
@@ -583,7 +583,10 @@ class ChemicalSolution implements EntityInterface
      * to the sum of the water volume and the components volume
      * @return bool
      *
-     * @Assert\True()
+     * @Assert\True(message="
+     * There is a discrepancy between the solution's total volume
+     * and the sum of the water volume and the components volume"
+     * )
      */
     public function isComponentVolumeValid(){
         return $this->waterVolume + $this->getComponentsVolume() == $this->initialVolume;
