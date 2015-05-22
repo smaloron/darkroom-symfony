@@ -7,3 +7,6 @@ darkroom_chemistry:
     resource: "@DarkroomAppBundle/Controller/Chemistry"
     type:     annotation
     prefix:   /chemistry/
+
+fos_js_routing:
+    resource: "@FOSJsRoutingBundle/Resources/config/routing/routing.xml"

@@ -102,8 +102,8 @@ abstract class AbstractSimpleCrudController extends Controller {
      * @param int|null $id
      * @param FormInterface $form
      *
-     * @Route("/")
-     * @Route("/{id}", requirements={"id"="\d+"})
+     * @Route("/", options={"expose"=true})
+     * @Route("/{id}", requirements={"id"="\d+"}, options={"expose"=true})
      * @Template()
      *
      * @return array
@@ -159,7 +159,7 @@ abstract class AbstractSimpleCrudController extends Controller {
     /**
      * Delete an entity
      *
-     * @Route("/delete/{id}")
+     * @Route("/delete/{id}", requirements={"id"="\d+"})
      *
      * @param $id
      * @return RedirectResponse

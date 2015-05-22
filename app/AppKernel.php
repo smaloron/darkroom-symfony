@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new Hautelook\AliceBundle\HautelookAliceBundle(),
             new Darkroom\ModelBundle\DarkroomModelBundle(),
             new Darkroom\AppBundle\DarkroomAppBundle(),
+            new FOS\JsRoutingBundle\FOSJsRoutingBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

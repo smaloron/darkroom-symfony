@@ -50,6 +50,8 @@ mimetypes:
             libs.js:
                 - app/Resources/libs/jquery/jquery.js
                 - app/Resources/libs/semantic-ui/dist/semantic.js
+                - vendor/friendsofsymfony/jsrouting-bundle/Resources/public/js/router.js
+
     fonts:
         dev:
             outputFolder: web/tmp/css/styles.css/themes/default/assets
