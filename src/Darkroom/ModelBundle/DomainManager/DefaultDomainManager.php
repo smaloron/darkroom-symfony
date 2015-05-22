@@ -1,10 +1,12 @@
 <?php
 
-namespace Darkroom\ModelBundle\EntityManager;
+namespace Darkroom\ModelBundle\DomainManager;
 
+use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\Entity;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -13,10 +15,10 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  * It is not abstract since it is used in services to provides
  * basic functionality for simple crud operations
  *
- * Class DefaultEntityManager
- * @package Darkroom\ModelBundle\EntityManager
+ * Class DefaultDomainManager
+ * @package Darkroom\ModelBundle\DomainManager
  */
-class DefaultEntityManager implements EntityManagerInterface
+class DefaultDomainManager implements DomainManagerInterface
 {
 
     /**
@@ -38,7 +40,8 @@ class DefaultEntityManager implements EntityManagerInterface
      * @param EntityManager $entityManager
      * @param $entityName
      */
-    public function __construct(EntityManager $entityManager, $entityName){
+    public function __construct(EntityManager $entityManager, $entityName)
+    {
         $this->entityManager = $entityManager;
         $this->entityName = $entityName;
         $this->repository = $this->entityManager->getRepository($this->entityName);
@@ -48,7 +51,8 @@ class DefaultEntityManager implements EntityManagerInterface
      *
      * @return array
      */
-    public function getAll(){
+    public function getAll()
+    {
         $entities = $this->repository->findAll();
 
         if ($entities === null) {
@@ -62,7 +66,8 @@ class DefaultEntityManager implements EntityManagerInterface
      * @param $id
      * @return null|Entity
      */
-    public function getOneById($id){
+    public function getOneById($id)
+    {
         $entity = $this->repository->find($id);
 
         if ($entity === null) {
@@ -75,7 +80,8 @@ class DefaultEntityManager implements EntityManagerInterface
     /**
      * @param int $id
      */
-    public function deleteById($id){
+    public function deleteById($id)
+    {
         $entity = $this->getOneById($id);
         $this->entityManager->remove($entity);
     }
@@ -83,30 +89,37 @@ class DefaultEntityManager implements EntityManagerInterface
     /**
      * @param $entity
      */
-    public function delete($entity){
+    public function delete($entity)
+    {
         $this->entityManager->remove($entity);
     }
 
     /**
-     * @param $entity
+     * @param EntityInterface $entity
+     * @param PersistentCollection $components
      */
-    public function persist($entity){
+    public function persist(DarkroomEntityInterface $entity, PersistentCollection $components = null)
+    {
         $this->entityManager->persist($entity);
     }
 
-    public function flush(){
+    public function flush()
+    {
         $this->entityManager->flush();
     }
 
-    public function getRepository(){
+    public function getRepository()
+    {
         return $this->repository;
     }
 
-    public function getEntityManager(){
+    public function getEntityManager()
+    {
         return $this->entityManager;
     }
 
-    public function getEntityName(){
+    public function getEntityName()
+    {
         return $this->entityName;
     }
 

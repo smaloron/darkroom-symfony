@@ -2,7 +2,7 @@
 
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
-use Darkroom\ModelBundle\Entity\EntityInterface;
+use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity
  */
-class Unit implements EntityInterface
+class Unit implements DarkroomEntityInterface
 {
     /**
      * @var integer

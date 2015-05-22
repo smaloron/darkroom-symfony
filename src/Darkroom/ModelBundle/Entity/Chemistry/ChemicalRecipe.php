@@ -2,7 +2,7 @@
 
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
-use Darkroom\ModelBundle\Entity\EntityInterface;
+use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Index(name="manufacturer_id", columns={"manufacturer_id"})})
  * @ORM\Entity
  */
-class ChemicalRecipe implements EntityInterface
+class ChemicalRecipe implements DarkroomEntityInterface
 {
     /**
      * @var integer

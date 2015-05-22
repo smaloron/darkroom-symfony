@@ -2,7 +2,7 @@
 
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
-use Darkroom\ModelBundle\Entity\EntityInterface;
+use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -20,7 +20,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @UniqueEntity(fields="name", message="The chemical product name must be unique")
  */
-class ChemicalProduct implements EntityInterface
+class ChemicalProduct implements DarkroomEntityInterface
 {
     /**
      * @var integer

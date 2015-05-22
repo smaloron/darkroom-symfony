@@ -2,7 +2,7 @@
 
 namespace Darkroom\ModelBundle\FormHandler;
 
-use Darkroom\ModelBundle\EntityManager\EntityManagerInterface;
+use Darkroom\ModelBundle\DomainManager\DomainManagerInterface;
 use Symfony\Component\Form\FormInterface;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -26,16 +26,16 @@ class DefaultFormHandler implements FormHandlerInterface
     protected $request;
 
     /**
-     * @var EntityManagerInterface
+     * @var DomainManagerInterface
      */
     protected $entityManager;
 
     /**
      * @param FormInterface $form
      * @param Request $request
-     * @param EntityManagerInterface $entityManager
+     * @param DomainManagerInterface $entityManager
      */
-    public function __construct(FormInterface $form, Request $request, EntityManagerInterface $entityManager){
+    public function __construct(FormInterface $form, Request $request, DomainManagerInterface $entityManager){
         $this->form = $form;
         $this->request = $request;
         $this->entityManager = $entityManager;

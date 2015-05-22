@@ -1,6 +1,6 @@
 <?php
 namespace Darkroom\ModelBundle\Entity;
 
-interface EntityInterface {
+interface DarkroomEntityInterface {
     public function getId();
 }

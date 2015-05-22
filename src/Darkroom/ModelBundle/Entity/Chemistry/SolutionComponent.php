@@ -2,7 +2,7 @@
 
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
-use Darkroom\ModelBundle\Entity\EntityInterface;
+use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,7 +12,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="solution_components", indexes={@ORM\Index(name="solution_component_to_master_solution", columns={"solution_id"}), @ORM\Index(name="solution_component_to_element_solution", columns={"component_id"})})
  * @ORM\Entity
  */
-class SolutionComponent implements EntityInterface
+class SolutionComponent implements DarkroomEntityInterface
 {
     /**
      * @var integer

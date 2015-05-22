@@ -11,12 +11,11 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
  *
  * @Route("/chemical-recipe")
  */
-class ChemicalRecipeController extends AbstractSimpleCrudController{
+class ChemicalRecipeController extends AbstractSimpleCrudController
+{
 
     protected $baseServicesName = 'darkroom.chemicalrecipe';
     protected $baseRoute = 'darkroom_app_chemistry_chemicalrecipe';
     protected $controllerName = 'DarkroomAppBundle:Chemistry/ChemicalRecipe';
-
-
 
 }

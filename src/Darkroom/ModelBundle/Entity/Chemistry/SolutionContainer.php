@@ -2,7 +2,7 @@
 
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
-use Darkroom\ModelBundle\Entity\EntityInterface;
+use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  * @ORM\Entity
  * @UniqueEntity(fields="code", message="The container code must be unique")
  */
-class SolutionContainer implements EntityInterface
+class SolutionContainer implements DarkroomEntityInterface
 {
     /**
      * @var integer

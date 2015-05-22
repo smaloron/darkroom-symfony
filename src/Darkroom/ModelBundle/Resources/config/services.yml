@@ -1,5 +1,5 @@
 parameters:
-    darkroom.default.entitymanager.class: Darkroom\ModelBundle\EntityManager\DefaultEntityManager
+    darkroom.default.domainmanager.class: Darkroom\ModelBundle\DomainManager\DefaultDomainManager
     darkroom.default.formhandler.class: Darkroom\ModelBundle\FormHandler\DefaultFormHandler
 
     darkroom.unitcategory.type.class: Darkroom\ModelBundle\Form\Chemistry\UnitCategoryType
@@ -17,6 +17,8 @@ parameters:
     darkroom.chemicalrecipe.type.class: Darkroom\ModelBundle\Form\Chemistry\ChemicalRecipeType
     darkroom.chemicalrecipe.model.class: Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe
     darkroom.chemicalrecipe.formhandler.class: Darkroom\ModelBundle\FormHandler\ChemicalRecipeFormHandler
+    darkroom.chemicalrecipe.domainmanager.class: Darkroom\ModelBundle\DomainManager\ChemicalRecipeDomainManager
+    darkroom.recipecomponent.domainmanager.class: Darkroom\ModelBundle\DomainManager\RecipeComponentDomainManager
 
 
 services:
@@ -37,10 +39,10 @@ services:
   darkroom.unitcategory.form.handler:
       class: %darkroom.default.formhandler.class%
       scope: request
-      arguments: ["@darkroom.unitcategory.form", "@request","@darkroom.unitcategory.entitymanager"]
+      arguments: ["@darkroom.unitcategory.form", "@request","@darkroom.unitcategory.domainmanager"]
 
-  darkroom.unitcategory.entitymanager:
-      class: %darkroom.default.entitymanager.class%
+  darkroom.unitcategory.domainmanager:
+      class: %darkroom.default.domainmanager.class%
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\UnitCategory"
@@ -61,10 +63,10 @@ services:
   darkroom.unit.form.handler:
       class: %darkroom.default.formhandler.class%
       scope: request
-      arguments: ["@darkroom.unit.form", "@request","@darkroom.unit.entitymanager"]
+      arguments: ["@darkroom.unit.form", "@request","@darkroom.unit.domainmanager"]
 
-  darkroom.unit.entitymanager:
-      class: %darkroom.default.entitymanager.class%
+  darkroom.unit.domainmanager:
+      class: %darkroom.default.domainmanager.class%
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\Unit"
@@ -85,10 +87,10 @@ services:
   darkroom.manufacturer.form.handler:
       class: %darkroom.default.formhandler.class%
       scope: request
-      arguments: ["@darkroom.manufacturer.form", "@request","@darkroom.manufacturer.entitymanager"]
+      arguments: ["@darkroom.manufacturer.form", "@request","@darkroom.manufacturer.domainmanager"]
 
-  darkroom.manufacturer.entitymanager:
-      class: %darkroom.default.entitymanager.class%
+  darkroom.manufacturer.domainmanager:
+      class: %darkroom.default.domainmanager.class%
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\Manufacturer"
@@ -109,10 +111,10 @@ services:
   darkroom.recipecategory.form.handler:
       class: %darkroom.default.formhandler.class%
       scope: request
-      arguments: ["@darkroom.recipecategory.form", "@request","@darkroom.recipecategory.entitymanager"]
+      arguments: ["@darkroom.recipecategory.form", "@request","@darkroom.recipecategory.domainmanager"]
 
-  darkroom.recipecategory.entitymanager:
-      class: %darkroom.default.entitymanager.class%
+  darkroom.recipecategory.domainmanager:
+      class: %darkroom.default.domainmanager.class%
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\RecipeCategory"
@@ -133,10 +135,10 @@ services:
   darkroom.chemicalproduct.form.handler:
       class: %darkroom.default.formhandler.class%
       scope: request
-      arguments: ["@darkroom.chemicalproduct.form", "@request","@darkroom.chemicalproduct.entitymanager"]
+      arguments: ["@darkroom.chemicalproduct.form", "@request","@darkroom.chemicalproduct.domainmanager"]
 
-  darkroom.chemicalproduct.entitymanager:
-      class: %darkroom.default.entitymanager.class%
+  darkroom.chemicalproduct.domainmanager:
+      class: %darkroom.default.domainmanager.class%
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\ChemicalProduct"
@@ -157,10 +159,10 @@ services:
   darkroom.solutioncontainer.form.handler:
       class: %darkroom.default.formhandler.class%
       scope: request
-      arguments: ["@darkroom.solutioncontainer.form", "@request","@darkroom.solutioncontainer.entitymanager"]
+      arguments: ["@darkroom.solutioncontainer.form", "@request","@darkroom.solutioncontainer.domainmanager"]
 
-  darkroom.solutioncontainer.entitymanager:
-      class: %darkroom.default.entitymanager.class%
+  darkroom.solutioncontainer.domainmanager:
+      class: %darkroom.default.domainmanager.class%
       arguments:
         - @doctrine.orm.default_entity_manager
         - "DarkroomModelBundle:Chemistry\SolutionContainer"
@@ -184,17 +186,18 @@ services:
       arguments:
         - "@darkroom.chemicalrecipe.form"
         - "@request"
-        - "@darkroom.chemicalrecipe.entitymanager"
-        - "@darkroom.recipecomponent.entitymanager"
+        - "@darkroom.chemicalrecipe.domainmanager"
+        - "@darkroom.recipecomponent.domainmanager"
 
-  darkroom.chemicalrecipe.entitymanager:
-      class: %darkroom.default.entitymanager.class%
+  darkroom.chemicalrecipe.domainmanager:
+      class: %darkroom.chemicalrecipe.domainmanager.class%
       arguments:
         - @doctrine.orm.default_entity_manager
+        - @darkroom.recipecomponent.domainmanager
         - "DarkroomModelBundle:Chemistry\ChemicalRecipe"
 
-  darkroom.recipecomponent.entitymanager:
-        class: %darkroom.default.entitymanager.class%
+  darkroom.recipecomponent.domainmanager:
+        class: %darkroom.recipecomponent.domainmanager.class%
         arguments:
           - @doctrine.orm.default_entity_manager
           - "DarkroomModelBundle:Chemistry\RecipeComponent"

@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Darkroom\ModelBundle\FormHandler\FormHandlerInterface;
 use Symfony\Component\Form\FormInterface;
-use Darkroom\ModelBundle\EntityManager\EntityManagerInterface;
+use Darkroom\ModelBundle\DomainManager\DomainManagerInterface;
 
 /**
  * This abstract class provides methods
@@ -24,7 +24,7 @@ abstract class AbstractSimpleCrudController extends Controller {
     /**
      * @var string
      */
-    protected $entityManagerName;
+    protected $domainManagerName;
 
     /**
      * @var string
@@ -58,18 +58,18 @@ abstract class AbstractSimpleCrudController extends Controller {
      *
      */
     public function __construct(){
-        $this->setEntityManagerName();
+        $this->setDomainManagerName();
         $this->setFormHandlerName();
         $this->setFormServiceName();
     }
 
     /**
-     * Set the EntityManagerName if not previously defined
+     * Set the DomainManagerName if not previously defined
      */
-    protected function setEntityManagerName()
+    protected function setDomainManagerName()
     {
-        if(!isset($this->entityManagerName)){
-            $this->entityManagerName = $this->baseServicesName. '.entitymanager';
+        if(!isset($this->domainManagerName)){
+            $this->domainManagerName = $this->baseServicesName. '.domainmanager';
         }
     }
 
@@ -171,10 +171,10 @@ abstract class AbstractSimpleCrudController extends Controller {
     }
 
     /**
-     * @return EntityManagerInterface
+     * @return DomainManagerInterface
      */
     public function getEntityManager(){
-        return $this->get($this->entityManagerName);
+        return $this->get($this->domainManagerName);
     }
 
     /**
