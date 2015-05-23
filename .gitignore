@@ -15,3 +15,4 @@
 web/compiled/*
 web/tmp/*
 data/test/*
+web/js

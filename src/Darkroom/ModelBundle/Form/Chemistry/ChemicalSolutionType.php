@@ -20,12 +20,11 @@ class ChemicalSolutionType extends AbstractType
     {
         $builder
             ->add('name', 'text')
-            ->add('notes', 'textarea')
+            ->add('notes', 'textarea', array ('required' => false))
             ->add('dateMixed', 'date')
             ->add('initialVolume', 'number')
-            ->add('waterVolume', 'number')
-            ->add('stockSolution', 'checkbox')
-            ->add('oneUse', 'checkbox')
+            ->add('stockSolution', 'checkbox', array ('required' => false))
+            ->add('oneUse', 'checkbox', array ('required' => false))
             ->add(
                 'container',
                 'entity',
@@ -33,6 +32,7 @@ class ChemicalSolutionType extends AbstractType
                     'class' => 'Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer',
                     'property' => 'name',
                     'required' => false,
+                    'empty_value' => 'Choose a container'
                 )
             )
             ->add(
@@ -40,7 +40,8 @@ class ChemicalSolutionType extends AbstractType
                 'entity',
                 array(
                     'class' => 'Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe',
-                    'property' => 'name',
+                    'required' => false,
+                    'empty_value' => 'choose a chemical recipe'
                 )
             )
             ->add(
@@ -52,6 +53,8 @@ class ChemicalSolutionType extends AbstractType
                     'allow_delete' => true,
                     'by_reference' => false,
                     'prototype' => true,
+                    'cascade_validation' => true,
+
                 )
             )
             ->add('save', 'submit');
@@ -63,7 +66,8 @@ class ChemicalSolutionType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class' => 'Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution'
+            'data_class' => 'Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution',
+            'cascade_validation' => true,
         ));
     }
 

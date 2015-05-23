@@ -22,14 +22,19 @@ class ChemicalRecipeFormHandler extends DefaultFormHandler{
     /**
      * @param FormInterface $form
      * @param Request $request
-     * @param DomainManagerInterface $recipeManager
+     * @param DomainManagerInterface $solutionManager
      * @param DomainManagerInterface $componentManager
      */
 
-    public function __construct(FormInterface $form, Request $request, DomainManagerInterface $recipeManager, DomainManagerInterface $componentManager){
+    public function __construct(
+        FormInterface $form,
+        Request $request,
+        DomainManagerInterface $solutionManager,
+        DomainManagerInterface $componentManager
+    ) {
         $this->form = $form;
         $this->request = $request;
-        $this->recipeManager = $recipeManager;
+        $this->recipeManager = $solutionManager;
         $this->componentManager = $componentManager;
     }
 

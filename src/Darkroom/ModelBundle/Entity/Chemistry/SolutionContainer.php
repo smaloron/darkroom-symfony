@@ -5,8 +5,8 @@ namespace Darkroom\ModelBundle\Entity\Chemistry;
 use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * SolutionContainer
@@ -146,5 +146,10 @@ class SolutionContainer implements DarkroomEntityInterface
         $this->note = $note;
 
         return $this;
+    }
+
+    public function getName()
+    {
+        return $this->code . ' ' . $this->volumeCapacity . ' ml';
     }
 }

@@ -6,7 +6,6 @@ use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\Entity;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
-use Doctrine\ORM\PersistentCollection;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -63,6 +62,15 @@ class DefaultDomainManager implements DomainManagerInterface
     }
 
     /**
+     * @param int $id
+     */
+    public function deleteById($id)
+    {
+        $entity = $this->getOneById($id);
+        $this->entityManager->remove($entity);
+    }
+
+    /**
      * @param $id
      * @return null|Entity
      */
@@ -78,15 +86,6 @@ class DefaultDomainManager implements DomainManagerInterface
     }
 
     /**
-     * @param int $id
-     */
-    public function deleteById($id)
-    {
-        $entity = $this->getOneById($id);
-        $this->entityManager->remove($entity);
-    }
-
-    /**
      * @param $entity
      */
     public function delete($entity)
@@ -95,10 +94,10 @@ class DefaultDomainManager implements DomainManagerInterface
     }
 
     /**
-     * @param EntityInterface $entity
-     * @param PersistentCollection $components
+     * @param DarkroomEntityInterface $entity
+     * @param array $components
      */
-    public function persist(DarkroomEntityInterface $entity, PersistentCollection $components = null)
+    public function persist(DarkroomEntityInterface $entity, array $components = null)
     {
         $this->entityManager->persist($entity);
     }

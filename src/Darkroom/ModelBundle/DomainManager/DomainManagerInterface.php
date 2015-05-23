@@ -3,7 +3,6 @@
 namespace Darkroom\ModelBundle\DomainManager;
 
 use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
-use Doctrine\ORM\PersistentCollection;
 
 /**
  * Interface DomainManagerInterface
@@ -17,7 +16,7 @@ interface DomainManagerInterface
 
     public function deleteById($id);
 
-    public function persist(DarkroomEntityInterface $entity, PersistentCollection $components = null);
+    public function persist(DarkroomEntityInterface $entity, array $components = null);
 
     public function getRepository();
 

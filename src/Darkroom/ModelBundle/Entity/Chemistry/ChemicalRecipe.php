@@ -225,4 +225,9 @@ class ChemicalRecipe implements DarkroomEntityInterface
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return '(' . $this->recipeCategory->getName() . ')' . $this->manufacturer->getName() . ' ' . $this->name;
+    }
 }

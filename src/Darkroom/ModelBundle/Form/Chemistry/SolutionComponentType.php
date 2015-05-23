@@ -2,6 +2,7 @@
 
 namespace Darkroom\ModelBundle\Form\Chemistry;
 
+use Doctrine\ORM\EntityRepository;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
@@ -20,12 +21,17 @@ class SolutionComponentType extends AbstractType
                 'entity',
                 array(
                     'class'     => 'Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution',
-                    'property'  => 'name',
+                    //'property'  => 'name',
+                    'query_builder' => function (EntityRepository $repository) {
+                        return $repository->createQueryBuilder('s')
+                            ->where('s.stockSolution = 1')
+                            ->add('orderBy', 's.dateMixed ASC');
+                    }
                 )
             )
             ->add('volume', 'number');
     }
-    
+
     /**
      * @param OptionsResolverInterface $resolver
      */

@@ -15,6 +15,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      @ORM\Index(name="chemical_solution_to_recipe", columns={"recipe_id"}),
  *      @ORM\Index(name="container_id", columns={"container_id"})
  *  })
+ *
+ * @ORM\HasLifecycleCallbacks()
+ *
  * @ORM\Entity
  */
 class ChemicalSolution implements DarkroomEntityInterface
@@ -30,7 +33,7 @@ class ChemicalSolution implements DarkroomEntityInterface
 
     /**
      * @var string
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="The name of the solution cannot be blank")
      * @Assert\length(max=50)
      *
      * @ORM\Column(name="name", type="string", length=50, nullable=false)
@@ -39,7 +42,6 @@ class ChemicalSolution implements DarkroomEntityInterface
 
     /**
      * @var string
-     * @Assert\NotBlank()
      * @Assert\Length(max=50)
      *
      * @ORM\Column(name="notes", type="text", nullable=true)
@@ -48,7 +50,7 @@ class ChemicalSolution implements DarkroomEntityInterface
 
     /**
      * @var \DateTime
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="The date mixed cannot be blank")
      * @Assert\DateTime
      *
      * @ORM\Column(name="date_mixed", type="date", nullable=false)
@@ -122,8 +124,6 @@ class ChemicalSolution implements DarkroomEntityInterface
     /**
      * @var ChemicalRecipe
      *
-     * @Assert\NotBlank()
-     *
      * @ORM\ManyToOne(targetEntity="ChemicalRecipe")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="recipe_id", referencedColumnName="id")
@@ -147,9 +147,7 @@ class ChemicalSolution implements DarkroomEntityInterface
      */
     private $dependantSolutions;
 
-    /**
-     *
-     */
+
     public function __construct()
     {
         $this->components = new ArrayCollection();
@@ -295,7 +293,6 @@ class ChemicalSolution implements DarkroomEntityInterface
     {
         $initialVolume = $this->getInitialVolume();
         $usedVolume = $this->getUsedVolume();
-        //return $this->getInitialVolume() - $this->getUsedVolume();
         return $initialVolume - $usedVolume;
     }
 
@@ -514,11 +511,93 @@ class ChemicalSolution implements DarkroomEntityInterface
 
     public function addDependantSolution(SolutionComponent $dependant){
         $this->dependantSolutions->add($dependant);
+
         return $this;
     }
 
-    public function removeDependantSolution(SolutionComponent $dependant){
+    public function removeDependantSolution(SolutionComponent $dependant)
+    {
         $this->dependantSolutions->removeElement($dependant);
+    }
+
+    /**
+     * Add a new component to the solution
+     * @param SolutionComponent $component
+     * @return $this
+     */
+    public function addComponent(SolutionComponent $component)
+    {
+        $this->components->add($component);
+        return $this;
+    }
+
+    /**
+     * Remove a component from the solution
+     * @param SolutionComponent $component
+     */
+    public function removeComponent(SolutionComponent $component)
+    {
+        $this->components->removeElement($component);
+    }
+
+    /**
+     * Check if the container's capacity matches with the solution's volume
+     * @return bool
+     *
+     * @Assert\True(message="The container's capacity does not match with the solution's volume")
+     */
+    public function isContainerVolumeValid()
+    {
+        $check = true;
+        if ($this->container != null) {
+            $containerVolume = $this->container->getVolumeCapacity();
+            $check = $containerVolume >= $this->getInitialVolume();
+        }
+
+        return $check;
+    }
+
+    /**
+     * Check if the total volume of the solution is equal
+     * to the sum of the water volume and the components volume
+     * @return bool
+     *
+     * @Assert\True(message="
+     * The sum of the components volume cannot be greater than the total volume of the solution"
+     * )
+     */
+    public function isComponentVolumeValid()
+    {
+        return $this->getComponentsVolume() <= $this->initialVolume;
+
+    }
+
+    /**
+     * @return bool
+     * @Assert\True(message="A solution cannot be declared as a stock solution and be a one use solution")
+     */
+    public function isOneUseValid()
+    {
+        $valid = true;
+        if ($this->oneUse || $this->stockSolution) {
+            $valid = !($this->oneUse == $this->stockSolution);
+        }
+
+        return $valid;
+    }
+
+    /**
+     * @return bool
+     * @Assert\True(message="A solution can either have components or recipe but not both")
+     */
+    public function isRecipeValid()
+    {
+        return !($this->hasComponents() == $this->hasRecipe());
+    }
+
+    public function hasComponents()
+    {
+        return $this->getComponents()->count() > 0;
     }
 
     /**
@@ -544,52 +623,36 @@ class ChemicalSolution implements DarkroomEntityInterface
         $this->components = $components;
     }
 
-    /**
-     * Add a new component to the solution
-     * @param SolutionComponent $component
-     * @return $this
-     */
-    public function addComponent(SolutionComponent $component){
-        $this->components->add($component);
-        return $this;
+    public function hasRecipe()
+    {
+        return isset($this->recipe);
     }
 
     /**
-     * Remove a component from the solution
-     * @param SolutionComponent $component
-     */
-    public function removeComponent(SolutionComponent $component){
-        $this->components->removeElement($component);
-    }
-
-    /**
-     * Check if the container's capacity matches with the solution's volume
-     * @return bool
+     * Calculate the volume left and the water volume of the solution
      *
-     * @Assert\True(message="The container's capacity does not match with the solution's volume")
+     * @ORM\PreUpdate()
+     * @ORM\PrePersist()
      */
-    public function isContainerVolumeValid(){
-        $check = true;
-        if($this->container != null){
-            $containerVolume = $this->container->getVolumeCapacity();
-            $check = $containerVolume >= $this->getInitialVolume();
+    public function setCalculatedValues()
+    {
+        $this->volumeLeft = $this->initialVolume - $this->getUsedVolume();
+        $this->waterVolume = $this->initialVolume - $this->getComponentsVolume();
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        $name = '';
+        if (isset($this->recipe)) {
+            $name .= $this->recipe->getManufacturer()->getName();
+            $name .= ' ' . $this->recipe->getName() . ' ';
         }
+        $name .= $this->name . '(' . $this->volumeLeft . ')';
 
-        return $check;
-    }
-
-    /**
-     * Check if the total volume of the solution is equal
-     * to the sum of the water volume and the components volume
-     * @return bool
-     *
-     * @Assert\True(message="
-     * There is a discrepancy between the solution's total volume
-     * and the sum of the water volume and the components volume"
-     * )
-     */
-    public function isComponentVolumeValid(){
-        return $this->waterVolume + $this->getComponentsVolume() == $this->initialVolume;
+        return $name;
     }
 
 

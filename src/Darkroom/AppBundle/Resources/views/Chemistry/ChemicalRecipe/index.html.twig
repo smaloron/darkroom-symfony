@@ -124,6 +124,13 @@
 {{ parent() }}
 
 <script>
+
+    {% if app.environment =='dev' %}
+    Routing.setBaseUrl('/app_dev.php');
+    {% elseif app.environment == 'test' %}
+    Routing.setBaseUrl('/app_test.php');
+    {% endif %}
+
     jQuery(document).ready(function() {
 
         //Component collection management
@@ -150,6 +157,9 @@
 
             $collectionHolder.append(template);
             $collectionHolder.find('select.dropdown').dropdown();
+            $('.dropdown').dropdown('setting', 'onChange', function (value, text) {
+                onChemicalChange($(this).attr('name'), selectedValue);
+            });
 
         });
 
@@ -168,17 +178,54 @@
         {% if (id is defined and id > 0) or (not form.vars.valid) %}
             $modalForm.modal({
                 closable: false,
+                //Redirect to the index url on modal closing
                 onHide: function(){
-                    var url = window.location.href;
-                    url = url.substr(0, url.lastIndexOf('/'));
+                    var url = Routing.generate('darkroom_app_chemistry_chemicalrecipe_index');
+                    //url = url.substr(0, url.lastIndexOf('/'));
                     window.location.href = url;
                 }
             });
             $modalForm.modal('show');
         {% endif %}
 
+
+
+
         //Semantic ui form controls init
         $('select.dropdown').dropdown();
+        $('.dropdown').dropdown('setting', 'onChange', function (value, text) {
+            onChemicalChange($(this).attr('name'), value);
+        });
+
+        function onChemicalChange(dropDownName, selectedValue) {
+            var url = Routing.generate('darkroom_app_chemistry_chemicalproduct_ajaxgetunitlist',
+                    {id: selectedValue}
+            );
+
+            $.get(url).done(function (response) {
+                var newOptions = '';
+                response = JSON.parse(response);
+                $.each(response.data, function (i, value) {
+                    newOptions += '<option value="' + value.id + '">' + value.name + "</option>";
+                });
+
+                alert(newOptions);
+                var unitDropDownName = dropDownName.replace('[chemical]', '[unit]');
+                var $UnitSelect = $('select[name="' + unitDropDownName + '"');
+                $UnitSelect.empty();
+                $UnitSelect.dropdown();
+
+                //$('#myselect').append(newOptions);
+
+            });
+
+            //Get the ajax data
+
+
+            //Populate the select
+
+            //Refresh the dropdown
+        }
 
     });
 

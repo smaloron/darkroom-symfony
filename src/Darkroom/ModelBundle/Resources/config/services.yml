@@ -6,19 +6,30 @@ parameters:
     darkroom.unitcategory.model.class: Darkroom\ModelBundle\Entity\Chemistry\UnitCategory
     darkroom.unit.type.class: Darkroom\ModelBundle\Form\Chemistry\UnitType
     darkroom.unit.model.class: Darkroom\ModelBundle\Entity\Chemistry\Unit
+
     darkroom.manufacturer.type.class: Darkroom\ModelBundle\Form\Chemistry\ManufacturerType
     darkroom.manufacturer.model.class: Darkroom\ModelBundle\Entity\Chemistry\Manufacturer
+
     darkroom.recipecategory.type.class: Darkroom\ModelBundle\Form\Chemistry\RecipeCategoryType
     darkroom.recipecategory.model.class: Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory
+
     darkroom.chemicalproduct.type.class: Darkroom\ModelBundle\Form\Chemistry\ChemicalProductType
     darkroom.chemicalproduct.model.class: Darkroom\ModelBundle\Entity\Chemistry\ChemicalProduct
+
     darkroom.solutioncontainer.type.class: Darkroom\ModelBundle\Form\Chemistry\SolutionContainerType
     darkroom.solutioncontainer.model.class: Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer
+
     darkroom.chemicalrecipe.type.class: Darkroom\ModelBundle\Form\Chemistry\ChemicalRecipeType
     darkroom.chemicalrecipe.model.class: Darkroom\ModelBundle\Entity\Chemistry\ChemicalRecipe
     darkroom.chemicalrecipe.formhandler.class: Darkroom\ModelBundle\FormHandler\ChemicalRecipeFormHandler
     darkroom.chemicalrecipe.domainmanager.class: Darkroom\ModelBundle\DomainManager\ChemicalRecipeDomainManager
     darkroom.recipecomponent.domainmanager.class: Darkroom\ModelBundle\DomainManager\RecipeComponentDomainManager
+
+    darkroom.chemicalsolution.type.class: Darkroom\ModelBundle\Form\Chemistry\ChemicalSolutionType
+    darkroom.chemicalsolution.model.class: Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution
+    darkroom.chemicalsolution.formhandler.class: Darkroom\ModelBundle\FormHandler\ChemicalSolutionFormHandler
+    darkroom.chemicalsolution.domainmanager.class: Darkroom\ModelBundle\DomainManager\ChemicalSolutionDomainManager
+    darkroom.solutioncomponent.domainmanager.class: Darkroom\ModelBundle\DomainManager\SolutionComponentDomainManager
 
 
 services:
@@ -201,4 +212,38 @@ services:
         arguments:
           - @doctrine.orm.default_entity_manager
           - "DarkroomModelBundle:Chemistry\RecipeComponent"
+
+# Chemical recipe
+  darkroom.chemicalsolution.form.type:
+      class: %darkroom.chemicalsolution.type.class%
+      arguments: [%darkroom.chemicalsolution.model.class%]
+      tags:
+          - { name: form.type , alias: darkroom_modelbundle_chemicalsolution }
+
+  darkroom.chemicalsolution.form:
+      class: Symfony\Component\Form\Form
+      arguments: ["@darkroom.chemicalsolution.form.type"]
+      factory_method: create
+      factory_service: form.factory
+
+  darkroom.chemicalsolution.form.handler:
+      class: %darkroom.chemicalsolution.formhandler.class%
+      scope: request
+      arguments:
+        - "@darkroom.chemicalsolution.form"
+        - "@request"
+        - "@darkroom.chemicalsolution.domainmanager"
+
+  darkroom.chemicalsolution.domainmanager:
+      class: %darkroom.chemicalsolution.domainmanager.class%
+      arguments:
+        - @doctrine.orm.default_entity_manager
+        - @darkroom.solutioncomponent.domainmanager
+        - "DarkroomModelBundle:Chemistry\ChemicalSolution"
+
+  darkroom.Solutioncomponent.domainmanager:
+        class: %darkroom.solutioncomponent.domainmanager.class%
+        arguments:
+          - @doctrine.orm.default_entity_manager
+          - "DarkroomModelBundle:Chemistry\SolutionComponent"
 

@@ -1,0 +1,211 @@
+{% extends '@DarkroomApp/Chemistry/layout.html.twig' %}
+
+{% block body %}
+
+
+    <div class="ui grid centered">
+
+        <!-- List of unit categories -->
+        <div class="twelve wide column">
+            <table class="ui sortable celled striped table">
+                <caption><h3>Chemical solution list</h3></caption>
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Manufacturer</th>
+                    <th>Date mixed</th>
+                    <th>
+                        <div class="mini circular ui blue icon button add-recipe" title="Add a recipe">
+                            <i class="icon plus"></i>
+                            Add solution
+                        </div>
+                    </th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for item in model %}
+                    <tr>
+                        <td>{{ item.name }}</td>
+                        <td>{{ item.recipe.recipeCategory.name }}</td>
+                        <td>{{ item.recipe.manufacturer.name }}</td>
+                        <td>{{ item.dateMixed|date('d/m/Y') }}</td>
+                        <td>
+                            <a class="delete-confirm"
+                               href={{ path('darkroom_app_chemistry_chemicalsolution_delete', {id: item.id}) }}>
+                                <i class="minus square icon"></i>
+                            </a>
+                            <a class=""
+                               href={{ path('darkroom_app_chemistry_chemicalsolution_index_1', {id: item.id}) }}>
+                                <i class="edit icon"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Form -->
+        <!--    <div class="height wide column">-->
+        <div class="ui modal" id="ModalForm">
+            <i class="close icon"></i>
+
+            <div class="header">
+                <h3>
+                    {% if (id is defined and id > 0) %} Update {% else %} New {% endif %}
+                    chemical solution
+                </h3>
+            </div>
+            <div class="content">
+                <form action="{{ action }}" method="POST" class="ui form">
+                    {{ form_errors(form) }}
+
+                    {{ form_row(form.name) }}
+                    {{ form_row(form.dateMixed) }}
+                    {{ form_row(form.initialVolume) }}
+                    {{ form_row(form.recipe) }}
+                    {{ form_row(form.container) }}
+
+                    {{ form_row(form.oneUse) }}
+
+                    {{ form_row(form.stockSolution) }}
+
+                    <!-- Prototype for rendering the component subforms -->
+                    {% macro prototype(component) %}
+                        <tr>
+                            <td>{{ form_widget(component.component, {attr:{'class': 'ui dropdown'}}) }}</td>
+                            <td>
+                                {{ form_widget(component.volume) }}
+                            </td>
+                            <td>
+                                <div class="mini circular ui blue icon button remove-component"
+                                     title="delete this component">
+                                    <i class="icon trash"></i>
+                                </div>
+
+                            </td>
+                        </tr>
+                    {% endmacro %}
+                    <!-- the prototype is stored here for future reference by Javacript -->
+                    <script type="text/html" id="components-prototype">
+                        {{ _self.prototype(form.components.vars.prototype) }}
+                    </script>
+
+                    <table id="components-container" class="ui stackable table">
+                        <thead>
+                        <tr>
+                            <th colspan="4">
+                                Components
+                            </th>
+                        </tr>
+                        <tr>
+                            <th>solution</th>
+                            <th>volume</th>
+                            <th>
+                                <div class="mini circular ui blue icon button add-component" title="Add a component">
+                                    <i class="icon plus"></i>
+                                    Add component
+                                </div>
+                            </th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for item in form.components %}
+                            {{ _self.prototype(item) }}
+                        {% endfor %}
+                        </tbody>
+                    </table>
+
+                    {{ form_row(form.notes) }}
+
+                    {{ form_row(form._token) }}
+
+                    {{ form_row(form.save) }}
+                </form>
+            </div>
+        </div>
+
+    </div>
+
+{% endblock %}
+
+{% block javascriptsFiles %}
+    {{ parent() }}
+
+    <script>
+
+        {% if app.environment =='dev' %}
+        Routing.setBaseUrl('/app_dev.php');
+        {% elseif app.environment == 'test' %}
+        Routing.setBaseUrl('/app_test.php');
+        {% endif %}
+
+        jQuery(document).ready(function () {
+
+            //Component collection management
+            var $collectionHolder = $('#components-container');
+            var headerRowCount = $collectionHolder.find('thead tr').length;
+
+            //Remove a component
+            $collectionHolder.on('click', 'div.remove-component', function (event) {
+                event.preventDefault();
+                var $row = $(this).parent('td').parent('tr');
+                $row.remove();
+
+            });
+
+            //Add a component
+            $collectionHolder.find('.add-component').on('click', function (event) {
+                event.preventDefault();
+                //jQuery row counts does not work with dynamic rows
+                var index = document.getElementById("components-container").rows.length;
+                index -= headerRowCount;
+                var template = $('#components-prototype')
+                        .text()
+                        .replace(/__name__/g, index);
+
+                $collectionHolder.append(template);
+                $collectionHolder.find('select.dropdown').dropdown();
+                $('.dropdown').dropdown('setting', 'onChange', function (value, text) {
+                    onChemicalChange($(this).attr('name'), selectedValue);
+                });
+
+            });
+
+            //Modal form management
+            var $modalForm = $('#ModalForm');
+            //closable must be false otherwise the modal closes on component delete
+            $modalForm.modal({closable: false});
+
+            //Show the form
+            $('.add-recipe').on('click', function () {
+                $modalForm.modal('show');
+            });
+
+            //Show the modal if a record is in edit mode
+            //or the form contains errors
+            {% if (id is defined and id > 0) or (not form.vars.valid) %}
+            $modalForm.modal({
+                closable: false,
+                //Redirect to the index url on modal closing
+                onHide: function () {
+                    var url = Routing.generate('darkroom_app_chemistry_chemicalsolution_index');
+                    window.location.href = url;
+                }
+            });
+            $modalForm.modal('show');
+            {% endif %}
+
+
+
+
+            //Semantic ui form controls init
+            $('select.dropdown').dropdown();
+
+
+        });
+
+
+    </script>
+{% endblock %}

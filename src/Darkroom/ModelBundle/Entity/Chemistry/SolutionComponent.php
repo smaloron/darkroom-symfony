@@ -69,52 +69,6 @@ class SolutionComponent implements DarkroomEntityInterface
     }
 
     /**
-     * Get volume
-     *
-     * @return float
-     */
-    public function getVolume()
-    {
-        return $this->volume;
-    }
-
-    /**
-     * Set volume
-     *
-     * @param float $volume
-     * @return SolutionComponent
-     */
-    public function setVolume($volume)
-    {
-        $this->volume = $volume;
-
-        return $this;
-    }
-
-    /**
-     * Get component
-     *
-     * @return ChemicalSolution
-     */
-    public function getComponent()
-    {
-        return $this->component;
-    }
-
-    /**
-     * Set component
-     *
-     * @param ChemicalSolution $component
-     * @return SolutionComponent
-     */
-    public function setComponent(ChemicalSolution $component = null)
-    {
-        $this->component = $component;
-
-        return $this;
-    }
-
-    /**
      * Get solution
      *
      * @return ChemicalSolution
@@ -144,9 +98,57 @@ class SolutionComponent implements DarkroomEntityInterface
      *
      * @return bool
      */
-    public function checkComponentVolume(){
+    public function isComponentVolumeValid()
+    {
         $componentVolumeLeft = $this->getComponent()->getVolumeLeft();
+
         return $componentVolumeLeft >= $this->getVolume();
+    }
+
+    /**
+     * Get component
+     *
+     * @return ChemicalSolution
+     */
+    public function getComponent()
+    {
+        return $this->component;
+    }
+
+    /**
+     * Set component
+     *
+     * @param ChemicalSolution $component
+     * @return SolutionComponent
+     */
+    public function setComponent(ChemicalSolution $component = null)
+    {
+        $this->component = $component;
+
+        return $this;
+    }
+
+    /**
+     * Get volume
+     *
+     * @return float
+     */
+    public function getVolume()
+    {
+        return $this->volume;
+    }
+
+    /**
+     * Set volume
+     *
+     * @param float $volume
+     * @return SolutionComponent
+     */
+    public function setVolume($volume)
+    {
+        $this->volume = $volume;
+
+        return $this;
     }
 
 }

@@ -2,26 +2,22 @@
 
 namespace Darkroom\ModelBundle\DomainManager;
 
+
 use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\ORM\EntityManager;
 
-/**
- * Class ChemicalRecipeDomainManager
- * @package Darkroom\ModelBundle\DomainManager
- */
-class ChemicalRecipeDomainManager extends DefaultDomainManager
+class ChemicalSolutionDomainManager extends DefaultDomainManager
 {
 
-    /**
-     * @var RecipeComponentDomainManager
-     */
     protected $componentManager;
 
-    public function __construct(
-        EntityManager $entityManager,
-        RecipeComponentDomainManager $componentManager,
-        $entityName
-    ) {
+    /**
+     * @param EntityManager $entityManager
+     * @param DomainManagerInterface $componentManager
+     * @param $entityName
+     */
+    public function __construct(EntityManager $entityManager, DomainManagerInterface $componentManager, $entityName)
+    {
         $this->entityManager = $entityManager;
         $this->entityName = $entityName;
         $this->repository = $this->entityManager->getRepository($this->entityName);
@@ -29,28 +25,30 @@ class ChemicalRecipeDomainManager extends DefaultDomainManager
     }
 
     /**
-     * @param DarkroomEntityInterface $recipe
+     * @param DarkroomEntityInterface $solution
      * @param array $components
      */
-    public function persist(DarkroomEntityInterface $recipe, array $components = null)
+    public function persist(DarkroomEntityInterface $solution, array $components = null)
     {
 
-        if ($recipe->getId() != null) {
-            $this->componentManager->removeOldComponents($recipe);
+        if ($solution->getId() != null) {
+            $this->componentManager->removeOldComponents($solution);
         }
 
         //Remove the components
-        $recipe->getComponents()->clear();
+        $solution->getComponents()->clear();
 
         //Persist the recipe in order to set the primary key
-        $this->entityManager->persist($recipe);
+        $this->entityManager->persist($solution);
         $this->flush();
 
         //Add the components
         foreach ($components as $item) {
-            $item->setRecipe($recipe);
+            $item->setSolution($solution);
             $this->entityManager->persist($item);
         }
         $this->flush();
     }
+
+
 }
