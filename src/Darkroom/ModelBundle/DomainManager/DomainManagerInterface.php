@@ -16,7 +16,7 @@ interface DomainManagerInterface
 
     public function deleteById($id);
 
-    public function persist(DarkroomEntityInterface $entity, array $components = null);
+    public function persist(DarkroomEntityInterface $entity, $components = null);
 
     public function getRepository();
 

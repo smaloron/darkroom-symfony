@@ -32,9 +32,8 @@ class ChemicalRecipeDomainManager extends DefaultDomainManager
      * @param DarkroomEntityInterface $recipe
      * @param array $components
      */
-    public function persist(DarkroomEntityInterface $recipe, array $components = null)
+    public function persist(DarkroomEntityInterface $recipe, $components = null)
     {
-
         if ($recipe->getId() != null) {
             $this->componentManager->removeOldComponents($recipe);
         }

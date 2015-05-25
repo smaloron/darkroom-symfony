@@ -97,7 +97,7 @@ class DefaultDomainManager implements DomainManagerInterface
      * @param DarkroomEntityInterface $entity
      * @param array $components
      */
-    public function persist(DarkroomEntityInterface $entity, array $components = null)
+    public function persist(DarkroomEntityInterface $entity, $components = null)
     {
         $this->entityManager->persist($entity);
     }
