@@ -5,8 +5,8 @@ namespace Darkroom\ModelBundle\Entity\Chemistry;
 use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * RecipeCategory
@@ -82,5 +82,10 @@ class RecipeCategory implements DarkroomEntityInterface
         $this->name = $name;
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

@@ -26,8 +26,8 @@ class SolutionComponent implements DarkroomEntityInterface
     /**
      * @var float
      *
-     * @Assert\NotBlank()
-     * @Assert\GreaterThan(value=0)
+     * @Assert\NotBlank(message="The component volume cannot be blank")
+     * @Assert\GreaterThan(value=0, message="The component volume must be greater than 0")
      *
      * @ORM\Column(name="volume", type="float", precision=10, scale=0, nullable=false)
      */
@@ -36,9 +36,9 @@ class SolutionComponent implements DarkroomEntityInterface
     /**
      * @var ChemicalSolution
      *
-     * @Assert\NotBlank()
+     * @Assert\NotBlank(message="The component cannot be blank")
      *
-     * @ORM\ManyToOne(targetEntity="ChemicalSolution")
+     * @ORM\ManyToOne(targetEntity="ChemicalSolution", inversedBy="components")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="component_id", referencedColumnName="id")
      * })
@@ -48,9 +48,7 @@ class SolutionComponent implements DarkroomEntityInterface
     /**
      * @var ChemicalSolution
      *
-     * @Assert\NotBlank()
-     *
-     * @ORM\ManyToOne(targetEntity="ChemicalSolution")
+     * @ORM\ManyToOne(targetEntity="ChemicalSolution", inversedBy="dependantSolutions")
      * @ORM\JoinColumns({
      *   @ORM\JoinColumn(name="solution_id", referencedColumnName="id")
      * })
