@@ -1,0 +1,24 @@
+Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution:
+  ChemicalSolution0:
+    name: Fixer stock solution
+    recipe: @ChemicalRecipe1
+    stockSolution: true
+    oneUse: false
+    initialVolume: 1000
+    dateMixed: <dateTime()>
+
+  ChemicalSolution1:
+    name: Fixer working solution
+    stockSolution: false
+    oneUse: false
+    initialVolume: 1000
+    dateMixed: <dateTime()>
+    category: @RecipeCategory0
+    components:
+      - @SolutionComponent0
+
+Darkroom\ModelBundle\Entity\Chemistry\SolutionComponent:
+  SolutionComponent0:
+    solution: @ChemicalSolution1
+    component: @ChemicalSolution0
+    volume: 200

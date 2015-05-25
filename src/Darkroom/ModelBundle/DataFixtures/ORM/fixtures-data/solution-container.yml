@@ -1,0 +1,13 @@
+Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer:
+  SolutionContainer0:
+    code: FIX-01
+    volumeCapacity: 1000
+  SolutionContainer1:
+    code: FIX-02
+    volumeCapacity: 2000
+  SolutionContainer2:
+    code: DEV-01
+    volumeCapacity: 1000
+  SolutionContainer3:
+    code: DEV-02
+    volumeCapacity: 1000

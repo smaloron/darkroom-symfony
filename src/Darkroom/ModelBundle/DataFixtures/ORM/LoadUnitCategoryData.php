@@ -15,6 +15,8 @@ class LoadUnitCategoryData extends DataFixtureLoader
             __DIR__.'/fixtures-data/recipe-category.yml',
             __DIR__.'/fixtures-data/chemical-product.yml',
             __DIR__.'/fixtures-data/chemical-recipe.yml',
+            __DIR__ . '/fixtures-data/solution-container.yml',
+            __DIR__ . '/fixtures-data/chemical-solution.yml',
 
         );
     }
