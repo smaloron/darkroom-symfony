@@ -18,6 +18,5 @@ class RecipeComponentDomainManager extends DefaultDomainManager
                 $this->delete($item);
             }
         }
-        $this->flush();
     }
 }

@@ -18,6 +18,5 @@ class SolutionComponentDomainManager extends DefaultDomainManager
                 $this->delete($item);
             }
         }
-        $this->flush();
     }
 }
