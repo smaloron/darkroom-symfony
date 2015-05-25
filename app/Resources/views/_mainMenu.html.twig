@@ -1,7 +1,9 @@
 <!--<nav class="ui ten wide column">-->
+
 <nav class="ui menu">
-    <a class="item" href="{{ path('darkroom_app_chemistry_unit_index') }}">Chimie</a>
+    <a class="item {% if 'chemistry' in app.request.attributes.get('_route') %} active {% endif %}"
+       href="{{ path('darkroom_app_chemistry_unit_index') }}">Chimie</a>
     <a class="item">Films</a>
     <a class="item">Tirages</a>
-    </div>
+
 </nav>
