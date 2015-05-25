@@ -132,10 +132,20 @@ class ChemicalSolution implements DarkroomEntityInterface
     private $recipe;
 
     /**
+     * @var RecipeCategory
+     *
+     * @ORM\ManyToOne(targetEntity="RecipeCategory")
+     * @ORM\JoinColumns({
+     *   @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     * })
+     */
+    private $category;
+
+    /**
      * Collection representing all the components of this chemical solution
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="SolutionComponent", mappedBy="component")
+     * @ORM\OneToMany(targetEntity="SolutionComponent", mappedBy="solution")
      */
     private $components;
 
@@ -143,7 +153,7 @@ class ChemicalSolution implements DarkroomEntityInterface
      * Collection representing all the solutions that use this solution as a component
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="SolutionComponent", mappedBy="solution")
+     * @ORM\OneToMany(targetEntity="SolutionComponent", mappedBy="component")
      */
     private $dependantSolutions;
 
@@ -371,6 +381,26 @@ class ChemicalSolution implements DarkroomEntityInterface
         }
 
         return $usedVolume;
+    }
+
+    /**
+     * @return RecipeCategory
+     */
+    public function getCategory()
+    {
+        return $this->category;
+    }
+
+    /**
+     * @param RecipeCategory $category
+     *
+     * @return RecipeCategory
+     */
+    public function setCategory($category)
+    {
+        $this->category = $category;
+
+        return $this;
     }
 
     /**
@@ -617,9 +647,9 @@ class ChemicalSolution implements DarkroomEntityInterface
      */
     public function setComponents($components)
     {
-        foreach ($components as $item) {
+        /*foreach ($components as $item) {
             $item->setSolution($this);
-        }
+        }*/
         $this->components = $components;
     }
 
@@ -627,6 +657,7 @@ class ChemicalSolution implements DarkroomEntityInterface
     {
         return isset($this->recipe);
     }
+
 
     /**
      * Calculate the volume left and the water volume of the solution
@@ -638,6 +669,10 @@ class ChemicalSolution implements DarkroomEntityInterface
     {
         $this->volumeLeft = $this->initialVolume - $this->getUsedVolume();
         $this->waterVolume = $this->initialVolume - $this->getComponentsVolume();
+
+        if (isset($this->recipe)) {
+            $this->category = $this->recipe->getRecipeCategory();
+        }
     }
 
     /**
@@ -645,12 +680,17 @@ class ChemicalSolution implements DarkroomEntityInterface
      */
     public function __toString()
     {
+        return $this->getFullName();
+    }
+
+    public function getFullName()
+    {
         $name = '';
         if (isset($this->recipe)) {
             $name .= $this->recipe->getManufacturer()->getName();
             $name .= ' ' . $this->recipe->getName() . ' ';
         }
-        $name .= $this->name . '(' . $this->volumeLeft . ')';
+        $name .= $this->name . ' (' . $this->volumeLeft . ' ml)';
 
         return $name;
     }

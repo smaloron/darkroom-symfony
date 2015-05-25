@@ -45,6 +45,15 @@ class ChemicalSolutionType extends AbstractType
                 )
             )
             ->add(
+                'category',
+                'entity',
+                array (
+                    'class' => 'Darkroom\ModelBundle\Entity\Chemistry\RecipeCategory',
+                    'required' => false,
+                    'empty_value' => 'choose a category'
+                )
+            )
+            ->add(
                 'components',
                 'collection',
                 array(
