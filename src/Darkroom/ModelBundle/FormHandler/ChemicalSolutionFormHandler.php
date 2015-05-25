@@ -29,11 +29,11 @@ class ChemicalSolutionFormHandler extends DefaultFormHandler
     }
 
     /**
-     * @param ChemicalSolution $recipe
+     * @param ChemicalSolution $solution
      */
-    public function onSuccess($recipe)
+    public function onSuccess($solution)
     {
         $components = $this->form->get('components')->getData();
-        $this->solutionManager->persist($recipe, $components);
+        $this->solutionManager->persist($solution, $components);
     }
 }
