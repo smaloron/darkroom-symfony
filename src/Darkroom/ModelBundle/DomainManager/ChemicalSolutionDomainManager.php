@@ -48,9 +48,11 @@ class ChemicalSolutionDomainManager extends DefaultDomainManager
             $solution->addComponent($item);
             $this->entityManager->persist($item);
         }
+
+        $solution->calculateDilution();
         $this->flush();
 
-        $id = $solution->getId();
+
     }
 
 

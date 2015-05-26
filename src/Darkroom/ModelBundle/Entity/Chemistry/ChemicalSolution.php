@@ -22,6 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ChemicalSolution implements DarkroomEntityInterface
 {
+    Const DILUTION_TRESHOLD = 15;
+
     /**
      * @var integer
      *
@@ -145,7 +147,7 @@ class ChemicalSolution implements DarkroomEntityInterface
      * Collection representing all the components of this chemical solution
      * @var ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="SolutionComponent", mappedBy="solution")
+     * @ORM\OneToMany(targetEntity="SolutionComponent", mappedBy="solution", cascade={"remove"})
      */
     private $components;
 
@@ -351,22 +353,7 @@ class ChemicalSolution implements DarkroomEntityInterface
      */
     public function getTotalVolume()
     {
-        return $this->waterVolume + $this->getComponentsVolume();
-    }
-
-    /**
-     * Calculate the volume of all the chemical components of the solution
-     * @return float
-     */
-    public function getComponentsVolume()
-    {
-        $componentVolume = 0.0;
-
-        foreach ($this->components as $item) {
-            $componentVolume += $item->getVolume();
-        }
-
-        return $componentVolume;
+        return $this->initialVolume;
     }
 
     /**
@@ -558,6 +545,7 @@ class ChemicalSolution implements DarkroomEntityInterface
     public function addComponent(SolutionComponent $component)
     {
         $this->components->add($component);
+
         return $this;
     }
 
@@ -600,6 +588,21 @@ class ChemicalSolution implements DarkroomEntityInterface
     {
         return $this->getComponentsVolume() <= $this->initialVolume;
 
+    }
+
+    /**
+     * Calculate the volume of all the chemical components of the solution
+     * @return float
+     */
+    public function getComponentsVolume()
+    {
+        $componentVolume = 0.0;
+
+        foreach ($this->components as $item) {
+            $componentVolume += $item->getVolume();
+        }
+
+        return $componentVolume;
     }
 
     /**
@@ -647,9 +650,9 @@ class ChemicalSolution implements DarkroomEntityInterface
      */
     public function setComponents($components)
     {
-        /*foreach ($components as $item) {
+        foreach ($components as $item) {
             $item->setSolution($this);
-        }*/
+        }
         $this->components = $components;
     }
 
@@ -657,7 +660,6 @@ class ChemicalSolution implements DarkroomEntityInterface
     {
         return isset($this->recipe);
     }
-
 
     /**
      * Calculate the volume left and the water volume of the solution
@@ -669,10 +671,40 @@ class ChemicalSolution implements DarkroomEntityInterface
     {
         $this->volumeLeft = $this->initialVolume - $this->getUsedVolume();
         $this->waterVolume = $this->initialVolume - $this->getComponentsVolume();
+        $this->calculateDilution();
 
         if (isset($this->recipe)) {
             $this->category = $this->recipe->getRecipeCategory();
         }
+    }
+
+    /**
+     * Calculate the dilution factor of the solution
+     * for example for a 1000 ml solution with a 100 ml component
+     * the dilution factor is 1+9
+     */
+    public function calculateDilution()
+    {
+        if ($this->components->count() == 0) {
+            $dilutionString = 1;
+        } else {
+            $nbComponents = $this->components->count();
+            $dilutions = array ();
+            foreach ($this->components as $item) {
+                if ($item->getVolume() > 0) {
+                    $ratio = $this->initialVolume / $item->getVolume();
+                    //Past this treshold it is customary to promote even numbers
+                    //even though it leads to false results
+                    if ($ratio <= self::DILUTION_TRESHOLD) {
+                        $ratio -= $nbComponents;
+                    }
+                    $dilutions[] = $ratio;
+                }
+            }
+            $dilutionString = '1+' . implode('+', $dilutions);
+        }
+
+        $this->dilution = $dilutionString;
     }
 
     /**
