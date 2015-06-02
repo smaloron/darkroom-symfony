@@ -3,6 +3,7 @@
 namespace Darkroom\ModelBundle\Entity\Chemistry;
 
 use Darkroom\ModelBundle\Entity\DarkroomEntityInterface;
+use Darkroom\ModelBundle\Repository\ChemicalSolutionRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @ORM\HasLifecycleCallbacks()
  *
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Darkroom\ModelBundle\Repository\ChemicalSolutionRepository")
  */
 class ChemicalSolution implements DarkroomEntityInterface
 {
