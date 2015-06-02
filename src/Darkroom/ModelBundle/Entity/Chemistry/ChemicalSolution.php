@@ -167,6 +167,7 @@ class ChemicalSolution implements DarkroomEntityInterface
         $this->dependantSolutions = new ArrayCollection();
     }
 
+
     /**
      * Get id
      *
@@ -298,80 +299,6 @@ class ChemicalSolution implements DarkroomEntityInterface
     }
 
     /**
-     * Get volumeLeft
-     *
-     * @return float
-     */
-    public function getVolumeLeft()
-    {
-        $initialVolume = $this->getInitialVolume();
-        $usedVolume = $this->getUsedVolume();
-        return $initialVolume - $usedVolume;
-    }
-
-    /**
-     * Set volumeLeft
-     *
-     * @param float $volumeLeft
-     *
-     * @return ChemicalSolution
-     */
-    public function setVolumeLeft($volumeLeft)
-    {
-        $this->volumeLeft = $volumeLeft;
-
-        return $this;
-    }
-
-
-    /**
-     * Get initialVolume
-     *
-     * @return float
-     */
-    public function getInitialVolume()
-    {
-        return $this->getTotalVolume();
-    }
-
-    /**
-     * Set initialVolume
-     *
-     * @param float $initialVolume
-     *
-     * @return ChemicalSolution
-     */
-    public function setInitialVolume($initialVolume)
-    {
-        $this->initialVolume = $initialVolume;
-
-        return $this;
-    }
-
-    /**
-     * Calculate the total volume of the solution
-     * @return float
-     */
-    public function getTotalVolume()
-    {
-        return $this->initialVolume;
-    }
-
-    /**
-     * Calculate the volume of this solution used by other solutions
-     * @return float
-     */
-    public function getUsedVolume()
-    {
-        $usedVolume = 0.0;
-        foreach ($this->dependantSolutions as $item) {
-            $usedVolume += $item->getVolume();
-        }
-
-        return $usedVolume;
-    }
-
-    /**
      * @return RecipeCategory
      */
     public function getCategory()
@@ -387,30 +314,6 @@ class ChemicalSolution implements DarkroomEntityInterface
     public function setCategory($category)
     {
         $this->category = $category;
-
-        return $this;
-    }
-
-    /**
-     * Get waterVolume
-     *
-     * @return float
-     */
-    public function getWaterVolume()
-    {
-        return $this->waterVolume;
-    }
-
-    /**
-     * Set waterVolume
-     *
-     * @param float $waterVolume
-     *
-     * @return ChemicalSolution
-     */
-    public function setWaterVolume($waterVolume)
-    {
-        $this->waterVolume = $waterVolume;
 
         return $this;
     }
@@ -527,7 +430,8 @@ class ChemicalSolution implements DarkroomEntityInterface
         $this->dependantSolutions = $dependantSolutions;
     }
 
-    public function addDependantSolution(SolutionComponent $dependant){
+    public function addDependantSolution(SolutionComponent $dependant)
+    {
         $this->dependantSolutions->add($dependant);
 
         return $this;
@@ -574,6 +478,39 @@ class ChemicalSolution implements DarkroomEntityInterface
         }
 
         return $check;
+    }
+
+    /**
+     * Get initialVolume
+     *
+     * @return float
+     */
+    public function getInitialVolume()
+    {
+        return $this->getTotalVolume();
+    }
+
+    /**
+     * Set initialVolume
+     *
+     * @param float $initialVolume
+     *
+     * @return ChemicalSolution
+     */
+    public function setInitialVolume($initialVolume)
+    {
+        $this->initialVolume = $initialVolume;
+
+        return $this;
+    }
+
+    /**
+     * Calculate the total volume of the solution
+     * @return float
+     */
+    public function getTotalVolume()
+    {
+        return $this->initialVolume;
     }
 
     /**
@@ -670,13 +607,80 @@ class ChemicalSolution implements DarkroomEntityInterface
      */
     public function setCalculatedValues()
     {
-        $this->volumeLeft = $this->initialVolume - $this->getUsedVolume();
-        $this->waterVolume = $this->initialVolume - $this->getComponentsVolume();
+        $this->volumeLeft = $this->getVolumeLeft();//$this->initialVolume - $this->getUsedVolume();
+        $this->waterVolume = $this->getWaterVolume();//$this->initialVolume - $this->getComponentsVolume();
         $this->calculateDilution();
 
         if (isset($this->recipe)) {
             $this->category = $this->recipe->getRecipeCategory();
         }
+    }
+
+    /**
+     * Get volumeLeft
+     *
+     * @return float
+     */
+    public function getVolumeLeft()
+    {
+        $initialVolume = $this->getInitialVolume();
+        $usedVolume = $this->getUsedVolume();
+
+        return $initialVolume - $usedVolume;
+    }
+
+    /**
+     * Set volumeLeft
+     *
+     * @param float $volumeLeft
+     *
+     * @return ChemicalSolution
+     */
+    public function setVolumeLeft($volumeLeft)
+    {
+        $this->volumeLeft = $volumeLeft;
+
+        return $this;
+    }
+
+    /**
+     * Calculate the volume of this solution used by other solutions
+     * @return float
+     */
+    public function getUsedVolume()
+    {
+        $usedVolume = 0.0;
+        foreach ($this->dependantSolutions as $item) {
+            $usedVolume += $item->getVolume();
+        }
+
+        return $usedVolume;
+    }
+
+    /**
+     * Get waterVolume
+     *
+     * @return float
+     */
+    public function getWaterVolume()
+    {
+        //return $this->waterVolume;
+        return $this->initialVolume - $this->getComponentsVolume();
+
+    }
+
+    /**
+     * Set waterVolume
+     *
+     * @param float $waterVolume
+     *
+     * @return ChemicalSolution
+     */
+    public function setWaterVolume($waterVolume)
+    {
+        $this->waterVolume = $waterVolume;
+
+        return $this;
     }
 
     /**

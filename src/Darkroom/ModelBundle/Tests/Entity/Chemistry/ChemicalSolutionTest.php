@@ -1,17 +1,11 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: seb
- * Date: 15/05/2015
- * Time: 09:03
- */
 
 namespace Darkroom\ModelBundle\Tests\Entity\Chemistry;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Darkroom\ModelBundle\Entity\Chemistry\ChemicalSolution;
 use Darkroom\ModelBundle\Entity\Chemistry\SolutionComponent;
 use Darkroom\ModelBundle\Entity\Chemistry\SolutionContainer;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Validation;
 
 class ChemicalSolutionTest extends \PHPUnit_Framework_TestCase {
@@ -37,19 +31,18 @@ class ChemicalSolutionTest extends \PHPUnit_Framework_TestCase {
         $component = new SolutionComponent();
         $component->setComponent($stockSolution);
         $component->setSolution($workingSolution);
-        $component->setVolume(400);
+        $component->setVolume(100);
         $solutionComponent->add($component);
 
         $stockSolution->setDependantSolutions($solutionComponent);
 
-        $solution = new ChemicalSolution();
-        $solution->setName('Fixer working solution');
-        $solution->setComponents($solutionComponent);
-        $solution->setContainer(new SolutionContainer());
-        $solution->getContainer()->setVolumeCapacity(1000);
-        $solution->setWaterVolume(600);
 
-        $this->solution = $solution;
+        $workingSolution->setComponents($solutionComponent);
+        $workingSolution->setContainer(new SolutionContainer());
+        $workingSolution->getContainer()->setVolumeCapacity(1000);
+        $workingSolution->setInitialVolume(1000);
+
+        $this->solution = $workingSolution;
     }
 
     public function testValidate(){
@@ -59,8 +52,8 @@ class ChemicalSolutionTest extends \PHPUnit_Framework_TestCase {
     }
 
     public function testSolutionTotalVolume(){
-        $computedVolume = $this->solution->getTotalVolume();
-        $this->assertEquals(1000,$computedVolume, 'The solution volume is equal to 1000');
+        $computedVolume = $this->solution->getWaterVolume();
+        $this->assertEquals(900, $computedVolume, 'The solution water volume is equal to 900');
     }
 
     public function testContainerCapacity(){
@@ -71,7 +64,7 @@ class ChemicalSolutionTest extends \PHPUnit_Framework_TestCase {
     public function testStockSolutionVolumeLeft(){
         $stockSolution = $this->solution->getComponents()->get(0)->getComponent();
         $volumeLeft = $stockSolution->getVolumeLeft();
-        $this->assertEquals(600,$volumeLeft,'The volume left of the stock solution is 600');
+        $this->assertEquals(900, $volumeLeft, 'The volume left of the stock solution is 900');
     }
 
     public function testValidationFails(){
@@ -79,6 +72,12 @@ class ChemicalSolutionTest extends \PHPUnit_Framework_TestCase {
         $validator = Validation::createValidatorBuilder()->getValidator();
         $errors = $validator->validate($this->solution);
         $this->assertEquals(0, count($errors), 'The ChemicalSolution validation returns 1 error');
+    }
+
+    public function testDilutionString()
+    {
+        $this->solution->calculateDilution();
+        $this->assertEquals('1+9', $this->solution->getDilution(), 'The dilution is not 1+9');
     }
 
 }
