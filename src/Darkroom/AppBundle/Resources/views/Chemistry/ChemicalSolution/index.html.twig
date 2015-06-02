@@ -3,10 +3,10 @@
 {% block body %}
 
 
-    <div class="ui grid centered">
+    <!--<div class="ui grid centered">-->
 
         <!-- List of unit categories -->
-        <div class="twelve wide column">
+    <div class="ten wide column">
             <table class="ui sortable celled striped table">
                 <caption><h3>Chemical solution list</h3></caption>
                 <thead>
@@ -15,6 +15,7 @@
                     <th>Category</th>
                     <th>Manufacturer</th>
                     <th>Date mixed</th>
+                    <th>Volume left</th>
                     <th>
                         <div class="mini circular ui blue icon button add-recipe" title="Add a recipe">
                             <i class="icon plus"></i>
@@ -31,7 +32,7 @@
                             {% if item.recipe.recipeCategory is defined %}
                                 {{ item.recipe.recipeCategory.name }}
                             {% elseif item.category is defined %}
-                                {#{{ item.category.name }}#}
+                                {{ item.category.name }}
                             {% endif %}
                         </td>
                         <td>
@@ -40,6 +41,7 @@
                             {% endif %}
                         </td>
                         <td>{{ item.dateMixed|date('d/m/Y') }}</td>
+                        <td>{{ item.volumeLeft }} ml</td>
                         <td>
                             <a class="delete-confirm"
                                href={{ path('darkroom_app_chemistry_chemicalsolution_delete', {id: item.id}) }}>
@@ -137,7 +139,7 @@
             </div>
         </div>
 
-    </div>
+    <!-- </div> -->
 
 {% endblock %}
 
